@@ -1,0 +1,18 @@
+
+{% comment %}
+    get some constants into javascript
+    provided by base.context.javascript_settings
+    accessed by document.settings.SETTING_NAME
+{% endcomment %}
+
+{% load ext %}
+
+
+{% block js_settings %}
+    <script>
+        /* constants for javascript */
+        document.settings = {{ BASE_JS_SETTINGS|json:EXTRA_JS_SETTINGS }};
+    </script>
+{% endblock js_settings %}
+
+        

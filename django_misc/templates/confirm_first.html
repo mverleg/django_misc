@@ -1,0 +1,31 @@
+
+{% extends BASE_TEMPLATE %}
+
+
+{% block title %}
+	{{ subject }}
+	{{ TITLE_SEPARATOR }}
+	{{ block.super }}
+{% endblock title %}
+
+{% block content %}
+	
+	{% if subject %}
+		<h1>{{ subject|safe }}</h1>
+	{% endif %}
+	
+	<p>{{ message|safe }}</p>
+	
+	<form action="{{ submit_url }}" method="POST">
+        {% csrf_token %}
+        {% for key,val in post %}
+            <input type="hidden" name="{{ key }}" value="{{ val }}" />
+        {% endfor %}
+        <input type="hidden" name="{{ confirm_field_name }}" value="confirmed" />
+        <a href="{{ cancel_url }}" class="btn btn-default">cancel</a>
+        <input type="submit" class="btn btn-default {{ submit_class }}" value="{{ submit_text }}" />
+	</form>
+	
+{% endblock content %}
+
+        

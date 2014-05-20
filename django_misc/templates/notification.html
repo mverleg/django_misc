@@ -1,0 +1,28 @@
+
+{% extends BASE_TEMPLATE %}
+
+
+{% block title %}
+	{{ subject }}
+	{{ TITLE_SEPARATOR }}
+	{{ block.super }}
+{% endblock title %}
+
+{% block content %}
+	
+	{% if subject %}
+		<h1>{{ subject|safe }}</h1>
+	{% endif %}
+	
+	<p>{{ message|safe }}</p>
+	
+	{% if home_button %}
+	    <a href="{% url 'home' %}" class="btn btn-success btn-large"><i class="icon-white icon-ok"></i> okay</a>
+	{% endif %}
+	{% if next %}
+		<a href="{{ next }}" class='btn btn-primary btn-large'><i class='icon-white icon-play'></i> next</a>
+	{% endif %}
+	
+{% endblock content %}
+
+
