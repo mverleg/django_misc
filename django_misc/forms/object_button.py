@@ -12,7 +12,7 @@ from django import forms
 
 class ObjectButtonForm(SimpleCrispyForm):
 	
-	pk = forms.IntegerField(widget = forms.HiddenInput, required = True)
+	pk = forms.IntegerField(required = True, widget = forms.HiddenInput)
 	
 	URL_NAME = None
 	SUBMIT_NAME = 'ok'
@@ -28,13 +28,19 @@ class ObjectButtonForm(SimpleCrispyForm):
 				raise ValidationError('no %s with pk %d' % (self.cls.__name__, self.pk))
 		return pk
 	
-	def __init__(self, data = None, instance = None, cls = None, url_name = None, submit_name = None, back = None, back_name = None, submit_css = None, back_css = None, initial = {}, *args, **kwargs):
+	def __init__(self, data = None, instance = None, cls = None, url_name = None, submit_name = None, back = None, back_name = None, submit_css = None, back_css = None, small = None, initial = {}, *args, **kwargs):
 		if instance and not cls:
 			cls = type(instance)
-		submit_css = ('%s btn-xs' % submit_css).strip()
+		if small is None:
+			small = not back
+		if small:
+			submit_css = ('%s btn-xs' % submit_css).strip()
 		self.cls = cls
-		if hasattr(instance, 'pk') and not 'pk' in initial:
-			initial['pk'] = instance.pk
+		if not 'pk' in initial:
+			if hasattr(instance, 'pk'):
+				initial['pk'] = instance.pk
+			elif not instance is None:
+				raise Exception('no primary key supplied and instance of %s does not have one' % type(instance))
 		super(ObjectButtonForm, self).__init__(data = data, url_name = url_name, submit_name = submit_name, back = back, back_name = back_name, submit_css = submit_css, back_css = back_css, *args, initial = initial, **kwargs)
 	
 	'''

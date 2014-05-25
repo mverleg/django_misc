@@ -1,4 +1,4 @@
-
+from math import ceil
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.html import escape, mark_safe
 from django import template
@@ -16,9 +16,9 @@ register = template.Library()
 	(40 chosen to exclude &)
 '''
 @register.filter
-def obfuscate(clear, mi = 32, ma = 126):
+def obfuscate(clear):
 	''' the obfuscation '''
-	cypher = ''.join(obfuscate_letter(letter, pos, mi, ma) for pos, letter in enumerate(escape(clear)))
+	cypher = ''.join(obfuscate_letter(letter, pos) for pos, letter in enumerate(escape(clear)))
 	''' wrap it to mark for deobfuscating '''
 	span = '<span class=\'obfuscated\' title=\'this text was obfuscated to hide it from spammers; please enable javascript to see it\'>[enable JS]<span style="display: none;">%s</span></span>' % cypher
 	return mark_safe(span)
@@ -69,18 +69,24 @@ def json(obj, extra1 = None, extra2 = None, extra3 = None, extra4 = None, extra5
 
 
 '''
-	euro amount
+	|euro: euro amount
+	|ieuro: rounded euro amount
 '''
 @register.filter
-def euro(amount, min = None):
+def euro(amount, min = None, round = False):
 	if min:
 		amount = -amount
 	if amount == '':
 		raise ValueError('|euro filter applied to empty string (perhaps the variable was not found)')
 	try:
+		if round:
+			return mark_safe('&euro; %d' % float(amount))
 		return mark_safe('&euro; %.2f' % float(amount))
 	except ValueError:
 		raise ValueError('|euro filter should be applied to something that can be cast to a float (got %s)' % amount)
+@register.filter
+def ieuro(amount, min = None):
+	return euro(ceil(amount), min = min, round = True)
 
 
 '''
@@ -96,5 +102,13 @@ def call(context, func, **kwargs):
 	if func == '':
 		raise Exception('you invoked {% call func %} with either an unknown func, or func directly the function you want to call; this is regretably not possible, as the function is evaluated before reaching call; you need to pass a function that returns the function you want.')
 	return func(context['request'], **kwargs)
+
+
+'''
+	idea by /admin/admin_settings/setting/
+'''
+@register.filter
+def upto(text, delimiter = None):
+	return unicode(text).split(delimiter)[0]
 
 

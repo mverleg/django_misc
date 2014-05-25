@@ -1,5 +1,5 @@
 
-from django.template import Template
+from django.template import Template, Context
 from django.template.context import RequestContext
 from django.template.loader import get_template
 
@@ -17,5 +17,12 @@ def strender(request, template, context = {}):
 '''
 def render_str2str(request, in_str, context = {}):
 	return Template(in_str).render(RequestContext(request, context))
+
+
+'''
+	render a template to a string without request
+'''
+def strender_norequest(template, context = {}):
+	return get_template(template).render(Context(context))
 
 

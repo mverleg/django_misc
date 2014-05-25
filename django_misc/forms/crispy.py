@@ -15,10 +15,10 @@ def BaseFormHelper(url_name = None, submit_name = 'submit', submit_css = '', bac
 	if url_name:
 		helper.form_action = reverse(url_name)
 	if back:
-		helper.add_input(Button('back', back_name, onclick = 'location.href=\'%s\'' % back, css_class = back_css))
+		helper.add_input(Button('', back_name, onclick = 'location.href=\'%s\'' % reverse(back), css_class = back_css))
 	''' it is not advisable to use 'submit' or 'post' as input names, because jquery gets confused  '''
 	if submit_name:
-		helper.add_input(Submit('go', submit_name, css_class = submit_css))
+		helper.add_input(Submit('', submit_name, css_class = submit_css))
 	return helper
 
 
@@ -37,7 +37,6 @@ class SimpleCrispyForm(Form):
 	BACK_CSS = 'btn-danger'
 	
 	def __init__(self, data = None, url_name = None, submit_name = None, back = None, back_name = None, submit_css = None, back_css = None, *args, **kwargs):
-		print 'sn:', submit_name
 		self.helper = BaseFormHelper(
 			url_name = url_name or self.URL_NAME, 
 			submit_name = submit_name or self.SUBMIT_NAME, 
@@ -82,9 +81,7 @@ class ReadonlyFormMixin(object):
 	
 	def __init__(self, *args, **kwargs):
 		super(ReadonlyFormMixin, self).__init__(*args, **kwargs)
-		print 'go go fields'
 		for field in self.fields.values():
-			print field
 			field.widget.attrs['disabled'] = 'true'
 
 

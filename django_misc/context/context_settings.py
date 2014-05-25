@@ -7,7 +7,7 @@ import settings
 '''
 def context_settings(request):
 	return {
-		'SITE_URL':             settings.SITE_URL,
+		'SITE_URL':             settings.SITE_URL.rstrip('/'),
 		'BASE_TEMPLATE':        settings.BASE_TEMPLATE,
 		'BASE_EMAIL_TEMPLATE':  settings.BASE_EMAIL_TEMPLATE,
 		'USE_CDN':              settings.USE_CDN,
