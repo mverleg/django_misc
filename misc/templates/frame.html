@@ -1,0 +1,142 @@
+{% comment %}
+	this frame serves to create a consistent base layout for different styles, such that styles 
+	can be switched sort-of-simply (e.g., the menu items should still be <li> and everything
+	should still extend {% block content %}; at best, one would only replace BASE_TEMPLATE, 
+	to another template that overrides/extends the appropriate blocks in this template
+{% endcomment %}
+
+{% load statix_tags %}
+{% load staticfiles %}
+{% load ext %}
+
+
+<!DOCTYPE html>
+<html>{# possibly add lang='en' #}
+	<head>
+		{% block language_meta %}
+			<meta charset='utf-8'>
+		{% endblock language_meta %}
+		
+		{% block extra_meta %}{% endblock extra_meta %}
+		
+		<title>{% block title %}{{ TITLE_BASE }}{% endblock title %}</title>
+		
+		<!-- USE_CDN: {{ USE_CDN }} -->
+		{% block framework_css %}
+			{% if USE_CDN %}
+				<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' />
+				<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap-rtl.min.css' />
+			{% else %}
+				<link rel='stylesheet' href='{% static 'meyer_reset.css' %}' />
+				<link rel='stylesheet' href='{% static 'bootstrap/dist/css/bootstrap.min.css' %}' />
+			{% endif %}
+		{% endblock framework_css %}
+		
+		{% block widget_css %}
+			{% if USE_CDN %}
+				<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css' type='text/css'>
+			{% else %}
+				<link rel="stylesheet" href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" media="all" />
+			{% endif %}
+			<link rel="stylesheet" href="{% static 'bootstrap-star-rating/css/star-rating.min.css' %}" media="all" />
+			<link rel='stylesheet' href='{% static 'reactable.css' %}' />
+		{% endblock widget_css %}
+		
+		{% block theme_css %}
+		{% endblock theme_css %}
+		
+		{% block site_css %}
+			<link rel='stylesheet' href='{% static 'base_script.css' %}' />
+		{% endblock site_css %}
+		
+		{% block framework_js %}
+			{% if USE_CDN %}
+				<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
+				<script src='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js'></script>
+				<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js'></script>
+			{% else %}
+				<script src='{% static 'jquery/dist/jquery.min.js' %}'></script> {# minor version difference with CDN #}
+				<script src='{% static 'bootstrap/dist/js/bootstrap.min.js' %}'></script>
+				<script src="{% static 'momentjs/min/moment.min.js' %}"></script>
+			{% endif %}
+		{% endblock framework_js %}
+		
+		{% block widget_js %}
+			{% if USE_CDN %}
+				<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js'></script>
+			{% else %}
+				<script src="{% static 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+			{% endif %}
+			<script src="{% static 'bootstrap-star-rating/js/star-rating.min.js' %}"></script>
+		{% endblock widget_js %}
+		
+		{% block js_settings %}
+			<script>
+				/* get some constants into javascript; provided by base.context.javascript_settings; accessed by document.settings.SETTING_NAME */
+				document.settings = {{ BASE_JS_SETTINGS|json:EXTRA_JS_SETTINGS }};
+			</script>
+		{% endblock js_settings %}
+		
+		
+		{% block theme_js %}
+		{% endblock theme_js %}
+		
+		{% block site_js %}
+			<script src='{% static 'base_script.js' %}'></script>
+		{% endblock site_js %}
+		
+		{% block header %}
+		{% endblock header %}
+	</head>
+	
+	<body>
+		<div id='main_menu'>
+			{% block main_menu %}
+				<ol>
+					{% block menu_home %}
+						<li><a class="{% conditional_active_class 'home' %}" href='{% url 'home' %}'><i class="glyphicon glyphicon-home"></i> home</a></li>
+					{% endblock menu_home %}
+					{% block menu_info %}
+						<li><a class="{% conditional_active_class_statix 'about' %}" href='{% statix_url 'about' %}'><i class="glyphicon glyphicon-heart"></i> about</a></li>
+					{% endblock menu_info %}
+					{% block menu %}
+					{% endblock menu %}
+					{% block menu_auth %}
+						{% if request.user.is_authenticated %}
+							<li><a class="{% conditional_active_class 'logout' %}" href='{% url 'logout' %}?next={{ request.path }}'><i class="glyphicon glyphicon-off"></i> logout</a></li>
+							<li><a class="{% conditional_active_class 'profile' %}" href='{% url 'profile' %}'><i class="glyphicon glyphicon-edit"></i> account</a></li>
+						{% else %}
+							<li><a class="{% conditional_active_class 'login' %}" href='{% url 'login' %}?next={{ request.path }}'><i class="glyphicon glyphicon-user"></i> login</a></li>
+						{% endif %}
+					{% endblock menu_auth %}
+				</ol>
+			{% endblock main_menu %}
+		</div>
+		<div id='page'>
+			<div id='content'>
+				{% block content %}
+					empty document
+				{% endblock content %}
+			</div>
+			<div id='footer'>
+				{% block page_footer %}
+				    {% block footer_admin %}
+                        {% if request.user.is_superuser %}    
+                            <a href="{% url 'dump-data' %}">backup</a> /
+                        {% endif %}
+                        {% if request.user.is_staff %}
+                            <a href="/admin/">admin</a> / 
+                        {% endif %}
+                    {% endblock footer_admin %}
+					{% block footer %}
+					{% endblock footer %}
+					{% block footer_about %}
+					    <a href="{% statix_url 'credits' %}">credits</a> /
+                    {% endblock footer_about %}
+				{% endblock footer %}
+			</div>
+		</div>
+	</body>
+</html>
+
+

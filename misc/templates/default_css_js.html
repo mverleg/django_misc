@@ -13,18 +13,16 @@
         <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' />
         <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap-rtl.min.css' />
         <link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
     {% else %}
         <link rel='stylesheet' href='{% static 'meyer_reset.css' %}' />
         <link rel='stylesheet' href='{% static 'bootstrap/dist/css/bootstrap.min.css' %}' />
         <link rel="stylesheet" href="{% static 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css' %}" media="all" />
-        <link href='{% static 'font/bitter_stuff.woff' %}' rel='stylesheet' type='text/css'>
     {% endif %}
     <link rel="stylesheet" href="{% static 'bootstrap-star-rating/css/star-rating.min.css' %}" media="all" />
 {% endblock css %}
 
 {% block mu3_css %}
-    <link rel='stylesheet' href='{% static 'mu3_style.css' %}' />
+    <link rel='stylesheet' href='{% static 'gids/mu3_style.css' %}' />
     <link rel='stylesheet' href='{% static 'reactable.css' %}' />
 {% endblock mu3_css %}
 
@@ -45,7 +43,9 @@
 
 {% include 'js_settings.html' %}
 
-{% block mu3_js %}
-    <script src='{% static 'mu3_script.js' %}'></script>
+{% block theme_js %}
+    <script src='{% static 'aqua/mu3_script.js' %}'></script>
     <script src='{% static 'reactable.js' %}'></script>
-{% endblock mu3_js %}
+{% endblock theme_js %}
+
+
