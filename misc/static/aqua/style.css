@@ -186,7 +186,13 @@ form
 */
 .li_a_upgrade li
 {
+	float: left;
 	cursor: pointer;
+}
+
+#main_menu li
+{
+	margin: 0px 10px;
 }
 
 /*

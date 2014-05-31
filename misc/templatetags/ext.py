@@ -1,5 +1,7 @@
+
 from math import ceil
 from django.core.serializers.json import DjangoJSONEncoder
+from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
 from django import template
 from misc.functions.list_sample import list_sample
@@ -10,6 +12,18 @@ from json import dumps
 
 
 register = template.Library()
+
+'''
+	return output if the url matches the reverse or url_name, else ''
+	used to highlight currently active menu items
+'''
+@register.simple_tag(takes_context = True)
+def if_url(context, url_name, output = 'active'):
+	if 'request' in context:
+		url = reverse(url_name)
+		if context['request'].path == url:
+			return output
+	return ''
 
 ''' 
 	obfuscate text (probably email) with javascript

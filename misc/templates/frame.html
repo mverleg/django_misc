@@ -46,7 +46,7 @@
 		{% endblock theme_css %}
 		
 		{% block site_css %}
-			<link rel='stylesheet' href='{% static 'base_script.css' %}' />
+			<link rel='stylesheet' href='{% static 'base_style.css' %}' />
 		{% endblock site_css %}
 		
 		{% block framework_js %}
@@ -92,21 +92,21 @@
 	<body>
 		<div id='main_menu'>
 			{% block main_menu %}
-				<ol>
+				<ol class="li_a_upgrade">
 					{% block menu_home %}
-						<li><a class="{% conditional_active_class 'home' %}" href='{% url 'home' %}'><i class="glyphicon glyphicon-home"></i> home</a></li>
+						<li><a class="{% if_url 'home' %}" href='{% url 'home' %}'><i class="glyphicon glyphicon-home"></i> home</a></li>
 					{% endblock menu_home %}
 					{% block menu_info %}
-						<li><a class="{% conditional_active_class_statix 'about' %}" href='{% statix_url 'about' %}'><i class="glyphicon glyphicon-heart"></i> about</a></li>
+						<li><a class="{% if_url_statix 'about' %}" href='{% statix_url 'about' %}'><i class="glyphicon glyphicon-heart"></i> about</a></li>
 					{% endblock menu_info %}
 					{% block menu %}
 					{% endblock menu %}
 					{% block menu_auth %}
 						{% if request.user.is_authenticated %}
-							<li><a class="{% conditional_active_class 'logout' %}" href='{% url 'logout' %}?next={{ request.path }}'><i class="glyphicon glyphicon-off"></i> logout</a></li>
-							<li><a class="{% conditional_active_class 'profile' %}" href='{% url 'profile' %}'><i class="glyphicon glyphicon-edit"></i> account</a></li>
+							<li><a class="{% if_url 'logout' %}" href='{% url 'logout' %}?next={{ request.path }}'><i class="glyphicon glyphicon-off"></i> logout</a></li>
+							<li><a class="{% if_url 'profile' %}" href='{% url 'profile' %}'><i class="glyphicon glyphicon-edit"></i> account</a></li>
 						{% else %}
-							<li><a class="{% conditional_active_class 'login' %}" href='{% url 'login' %}?next={{ request.path }}'><i class="glyphicon glyphicon-user"></i> login</a></li>
+							<li><a class="{% if_url 'login' %}" href='{% url 'login' %}?next={{ request.path }}'><i class="glyphicon glyphicon-user"></i> login</a></li>
 						{% endif %}
 					{% endblock menu_auth %}
 				</ol>
@@ -115,7 +115,7 @@
 		<div id='page'>
 			<div id='content'>
 				{% block content %}
-					empty document
+				    empty document for frame.html
 				{% endblock content %}
 			</div>
 			<div id='footer'>
@@ -131,9 +131,10 @@
 					{% block footer %}
 					{% endblock footer %}
 					{% block footer_about %}
-					    <a href="{% statix_url 'credits' %}">credits</a> /
+					    <a href="{% statix_url 'contact' %}">contact</a> / 
+					    <a href="{% statix_url 'credits' %}">credits</a>
                     {% endblock footer_about %}
-				{% endblock footer %}
+				{% endblock page_footer %}
 			</div>
 		</div>
 	</body>

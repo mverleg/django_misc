@@ -10,7 +10,11 @@ from misc.decorators.disable_view import no_interaction_response
 
 class NonInteractiveModeMiddleware(object):
 	def process_request(self, request):
-		if request.method == 'POST' and not request.get_full_path().startswith('/account/'):
+		excluded = ('/account/', '/admin/',)
+		for exclusion in excluded:
+			if request.get_full_path().startswith(exclusion):
+				return None
+		if request.method == 'POST':
 			return no_interaction_response
 		return None
 
