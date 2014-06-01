@@ -15,7 +15,7 @@ def BaseFormHelper(url_name = None, submit_name = 'submit', submit_css = '', bac
 	if url_name:
 		helper.form_action = reverse(url_name)
 	if back:
-		helper.add_input(Button('', back_name, onclick = 'location.href=\'%s\'' % reverse(back), css_class = back_css))
+		helper.add_input(Button('', back_name, onclick = 'location.href=\'%s\'' % reverse(back), css_class = back_css, tabindex = -1))
 	''' it is not advisable to use 'submit' or 'post' as input names, because jquery gets confused  '''
 	if submit_name:
 		helper.add_input(Submit('', submit_name, css_class = submit_css))

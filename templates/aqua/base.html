@@ -22,10 +22,10 @@
     <ol id='menu_bar_left' class="li_a_upgrade">
         {% block menu_left %}
             {% block menu_home %}
-                <li><a class="{% if_url 'home' %}" href='{% url 'home' %}'><i class="glyphicon glyphicon-home"></i> home</a></li>
+                <li class="{% if_url 'home' %}"><a href='{% url 'home' %}'><i class="glyphicon glyphicon-home"></i> home</a></li>
             {% endblock menu_home %}
             {% block menu_info %}
-                <li><a class="{% if_url_statix 'about' %}" href='{% statix_url 'about' %}'><i class="glyphicon glyphicon-heart"></i> about</a></li>
+                <li class="{% if_url_statix 'about' %}"><a href='{% statix_url 'about' %}'><i class="glyphicon glyphicon-heart"></i> about</a></li>
             {% endblock menu_info %}
             {% block menu %}
             {% endblock menu %}
@@ -35,10 +35,10 @@
         {% block menu_right %}
             {% block menu_auth %}
                 {% if request.user.is_authenticated %}
-                    <li><a class="{% if_url 'logout' %}" href='{% url 'logout' %}?next={{ request.path }}'><i class="glyphicon glyphicon-off"></i> logout</a></li>
-                    <li><a class="{% if_url 'profile' %}" href='{% url 'profile' %}'><i class="glyphicon glyphicon-edit"></i> account</a></li>
+                    <li class="{% if_url 'logout' %}"><a href='{% url 'logout' %}?next={{ request.path }}'><i class="glyphicon glyphicon-off"></i> logout</a></li>
+                    <li class="{% if_url 'profile' %}"><a href='{% url 'profile' %}'><i class="glyphicon glyphicon-edit"></i> account</a></li>
                 {% else %}
-                    <li><a class="{% if_url 'login' %}" href='{% url 'login' %}?next={{ request.path }}'><i class="glyphicon glyphicon-user"></i> login</a></li>
+                    <li class="{% if_url 'login' %}"><a href='{% url 'login' %}?next={{ request.path }}'><i class="glyphicon glyphicon-user"></i> login</a></li>
                 {% endif %}
             {% endblock menu_auth %}
         {% endblock menu_right %}
