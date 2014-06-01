@@ -10,6 +10,14 @@
 {% load ext %}
 
 
+{% block theme_css %}
+    <link rel='stylesheet' href='{% static 'aqua/style.css' %}' />
+{% endblock theme_css %}
+
+{% block theme_js %}
+    <script src="{% static 'aqua/script.js' %}"></script>
+{% endblock theme_js %}
+
 {% block main_menu %}
     <ol id='menu_bar_left' class="li_a_upgrade">
         {% block menu_left %}
@@ -37,13 +45,5 @@
     </ol>
     <br class='clear' />
 {% endblock main_menu %}
-
-{% block theme_css %}
-    <link rel='stylesheet' href='{% static 'aqua/style.css' %}' />
-{% endblock theme_css %}
-
-{% block theme_js %}
-    <script src="{% static 'aqua/script.js' %}"></script>
-{% endblock theme_js %}
 
 

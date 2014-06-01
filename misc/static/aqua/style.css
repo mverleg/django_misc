@@ -188,6 +188,7 @@ form
 {
 	float: left;
 	cursor: pointer;
+	list-style-type: none;
 }
 
 #main_menu li
