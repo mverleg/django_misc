@@ -115,13 +115,13 @@ form
 #main_menu_left li
 {
 	float: left;
-	margin-left: 1em;
+	margin-left: .6em;
 }
 
 #main_menu_right li
 {
 	float: right;
-	margin-right: 1em;
+	margin-right: .6em;
 }
 
 #main_menu ol li a
@@ -189,11 +189,6 @@ form
 	float: left;
 	cursor: pointer;
 	list-style-type: none;
-}
-
-#main_menu li
-{
-	margin: 0px 10px;
 }
 
 /*

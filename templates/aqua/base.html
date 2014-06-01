@@ -19,7 +19,7 @@
 {% endblock theme_js %}
 
 {% block main_menu %}
-    <ol id='menu_bar_left' class="li_a_upgrade">
+    <ol id='main_menu_left' class="li_a_upgrade">
         {% block menu_left %}
             {% block menu_home %}
                 <li class="{% if_url 'home' %}"><a href='{% url 'home' %}'><i class="glyphicon glyphicon-home"></i> home</a></li>
@@ -31,7 +31,7 @@
             {% endblock menu %}
         {% endblock menu_left %}
     </ol>
-    <ol id='menu_bar_right' class="li_a_upgrade">
+    <ol id='main_menu_right' class="li_a_upgrade">
         {% block menu_right %}
             {% block menu_auth %}
                 {% if request.user.is_authenticated %}
