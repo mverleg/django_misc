@@ -19,7 +19,7 @@ def instantiate(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 
 	if out_kw_name is None:
 		out_kw_name = Model.__name__.lower()
 	if in_kw_name is None:
-		in_kw_name = '%s_pk' % out_kw_name
+		in_kw_name = '%s_%s' % (out_kw_name, model_attr_name)
 	def convert_to_instance_decorator(func):
 		def func_with_instance(request, *args, **kwargs):
 			identifier = kwargs.pop(in_kw_name)
@@ -33,4 +33,8 @@ def instantiate(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 
 		return func_with_instance
 	return convert_to_instance_decorator
 
+
+def instantiate_slug(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 'slug', model_attr_type = unicode):
+	return instantiate(Model = Model, in_kw_name = in_kw_name, out_kw_name = out_kw_name, model_attr_name = model_attr_name, model_attr_type = model_attr_type)
+	
 
