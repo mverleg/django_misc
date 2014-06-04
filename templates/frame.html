@@ -50,13 +50,13 @@
 		{% endblock site_css %}
 		
 		<!-- javascript moved to end of body; it's more logical here but more fast there -->
-        
+		
 		{% block header %}
 		{% endblock header %}
 	</head>
 	
 	<body>
-		<div id='main_menu'>
+		<div id='main_menu' {% block menu_attr %}{% endblock menu_attr %}>
 			{% block main_menu %}
 				<ol class="li_a_upgrade">
 					{% block menu_home %}
@@ -78,35 +78,42 @@
 				</ol>
 			{% endblock main_menu %}
 		</div>
-        
-		<div id='page'>
-			<div id='content'>
-				{% block content %}
-				    empty document for frame.html
-				{% endblock content %}
-			</div>
-			<div id='footer'>
-				{% block page_footer %}
-				    {% block footer_admin %}
-                        {% if request.user.is_superuser %}    
-                            <a href="{% url 'dump-data' %}">backup</a> /
-                        {% endif %}
-                        {% if request.user.is_staff %}
-                            <a href="/admin/">admin</a> / 
-                        {% endif %}
-                    {% endblock footer_admin %}
-					{% block footer %}
-					{% endblock footer %}
-					{% block footer_about %}
-					    <a href="{% statix_url 'contact' %}">contact</a> / 
-					    <a href="{% statix_url 'credits' %}">credits</a>
-                    {% endblock footer_about %}
-				{% endblock page_footer %}
+		
+		<div id='page' {% block page_attr %}{% endblock page_attr %}>
+			<div id='content' {% block content_attr %}{% endblock content_attr %}>
+				{% block content_area %}
+					{% block content %}
+						empty document for frame.html
+					{% endblock content %}
+				{% endblock content_area %}
 			</div>
 		</div>
-        
-        <!-- javascript here for speed considerations -->
-        
+		
+		<div id='footer_area' {% block footer_area_attr %}{% endblock footer_area_attr %}>
+			<div id='footer' {% block footer_attr %}{% endblock footer_attr %}>
+				<ul {% block footer_list_attr %}{% endblock footer_list_attr %}>
+					{% block page_footer %}
+						{% block footer_admin %}
+							{% if request.user.is_superuser %}    
+								<li><a href="{% url 'dump-data' %}">backup</a></li>
+							{% endif %}
+							{% if request.user.is_staff %}
+								<li><a href="/admin/">admin</a></li>
+							{% endif %}
+						{% endblock footer_admin %}
+						{% block footer %}
+						{% endblock footer %}
+						{% block footer_about %}
+							<li><a href="{% statix_url 'contact' %}">contact</a></li>
+							<li><a href="{% statix_url 'credits' %}">credits</a></li>
+						{% endblock footer_about %}
+					{% endblock page_footer %}
+				</ul>
+			</div>
+		</div>
+		
+		<!-- javascript here for speed considerations -->
+		
 		{% block framework_js %}
 			{% if USE_CDN %}
 				<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
@@ -141,7 +148,7 @@
 		{% block site_js %}
 			<script src='{% static 'script.js' %}'></script>
 		{% endblock site_js %}
-        
+		
 	</body>
 </html>
 

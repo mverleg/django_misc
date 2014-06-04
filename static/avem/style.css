@@ -2,6 +2,36 @@
 body
 {
 	padding-top: 50px;
+	padding-botton: 34px;
+}
+
+#footer > ul
+{
+	float: right;
+}
+
+#footer > ul li
+{
+	margin: .5em 0 .7em .5em;
+	padding: 0 .7em 0 0;
+}
+
+#footer > ul li:not(:last-child)
+{
+	border-style: solid;
+	border-right-width: 1px;
+	border-color: #E7E7E7;
+}
+
+#footer_area
+{
+	height: 34px;
+	min-height: 0;
+}
+
+#content
+{
+	padding: 1em 0 2em 0;
 }
 
 
