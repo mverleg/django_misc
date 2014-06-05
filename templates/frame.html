@@ -43,6 +43,7 @@
 		{% endblock widget_css %}
 		
 		{% block theme_css %}
+            <link rel='stylesheet' href='{% static 'base_style.css' %}' />
 		{% endblock theme_css %}
 		
 		{% block site_css %}
@@ -133,6 +134,7 @@
 				<script src="{% static 'eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
 			{% endif %}
 			<script src="{% static 'bootstrap-star-rating/js/star-rating.min.js' %}"></script>
+            <script src="{% static 'tablesorter/jquery.tablesorter.min.js' %}"></script>
 		{% endblock widget_js %}
 		
 		{% block js_settings %}
@@ -143,6 +145,7 @@
 		{% endblock js_settings %}
 		
 		{% block theme_js %}
+            <script src='{% static 'base_script.js' %}'></script>
 		{% endblock theme_js %}
 		
 		{% block site_js %}

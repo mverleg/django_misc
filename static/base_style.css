@@ -1,0 +1,8 @@
+
+/*
+	upgrade e.g. tr or li containing a href to itself being a clickable element
+*/
+.upgrade_anchor:hover
+{
+	cursor: pointer;
+}

@@ -11,10 +11,12 @@
 
 
 {% block theme_css %}
+    {{ block.super }}
     <link rel='stylesheet' href='{% static 'aqua/style.css' %}' />
 {% endblock theme_css %}
 
 {% block theme_js %}
+    {{ block.super }}
     <script src="{% static 'aqua/script.js' %}"></script>
 {% endblock theme_js %}
 

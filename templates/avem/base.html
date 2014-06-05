@@ -16,10 +16,12 @@
 {% endblock extra_meta %}
 
 {% block theme_css %}
+    {{ block.super }}
 	<link rel='stylesheet' href='{% static 'avem/style.css' %}' />
 {% endblock theme_css %}
 
 {% block theme_js %}
+    {{ block.super }}
 	<script src="{% static 'avem/script.js' %}"></script>
 {% endblock theme_js %}
 
