@@ -2,10 +2,10 @@
 import settings
 
 
-'''
-	put some settings into the default context
-'''
 def context_settings(request):
+	"""
+		put some settings into the default context
+	"""
 	return {
 		'SITE_URL':             settings.SITE_URL.rstrip('/'),
 		'BASE_TEMPLATE':        settings.BASE_TEMPLATE,

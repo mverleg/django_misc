@@ -1,7 +1,8 @@
+
 {% comment %}
-	this frame serves to create a consistent base layout for different styles, such that styles 
+	this frame serves to create a consistent base layout for different styles, such that styles
 	can be switched sort-of-simply (e.g., the menu items should still be <li> and everything
-	should still extend {% block content %}; at best, one would only replace BASE_TEMPLATE, 
+	should still extend {% block content %}; at best, one would only replace BASE_TEMPLATE,
 	to another template that overrides/extends the appropriate blocks in this template
 {% endcomment %}
 
@@ -16,11 +17,13 @@
 		{% block language_meta %}
 			<meta charset='utf-8'>
 		{% endblock language_meta %}
-		
+
+		<link rel='shortcut icon' href='{% block faviconimg %}{% static 'globesearch.png' %}{% endblock faviconimg %}'>
+
 		{% block extra_meta %}{% endblock extra_meta %}
-		
+
 		<title>{% block title %}{{ TITLE_BASE }}{% endblock title %}</title>
-		
+
 		<!-- USE_CDN: {{ USE_CDN }} -->
 		{% block framework_css %}
 			{% if USE_CDN %}
@@ -31,7 +34,7 @@
 				<link rel='stylesheet' href='{% static 'bootstrap/dist/css/bootstrap.min.css' %}' />
 			{% endif %}
 		{% endblock framework_css %}
-		
+
 		{% block widget_css %}
 			{% if USE_CDN %}
 				<link rel='stylesheet' href='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css' type='text/css'>
@@ -41,21 +44,21 @@
 			<link rel="stylesheet" href="{% static 'bootstrap-star-rating/css/star-rating.min.css' %}" media="all" />
 			<link rel='stylesheet' href='{% static 'reactable.css' %}' />
 		{% endblock widget_css %}
-		
+
 		{% block theme_css %}
             <link rel='stylesheet' href='{% static 'base_style.css' %}' />
 		{% endblock theme_css %}
-		
+
 		{% block site_css %}
 			<link rel='stylesheet' href='{% static 'style.css' %}' />
 		{% endblock site_css %}
-		
+
 		<!-- javascript moved to end of body; it's more logical here but more fast there -->
-		
+
 		{% block header %}
 		{% endblock header %}
 	</head>
-	
+
 	<body>
 		<div id='main_menu' {% block menu_attr %}{% endblock menu_attr %}>
 			{% block main_menu %}
@@ -79,7 +82,7 @@
 				</ol>
 			{% endblock main_menu %}
 		</div>
-		
+
 		<div id='page' {% block page_attr %}{% endblock page_attr %}>
 			<div id='content' {% block content_attr %}{% endblock content_attr %}>
 				{% block content_area %}
@@ -89,13 +92,13 @@
 				{% endblock content_area %}
 			</div>
 		</div>
-		
+
 		<div id='footer_area' {% block footer_area_attr %}{% endblock footer_area_attr %}>
 			<div id='footer' {% block footer_attr %}{% endblock footer_attr %}>
 				<ul {% block footer_list_attr %}{% endblock footer_list_attr %}>
 					{% block page_footer %}
 						{% block footer_admin %}
-							{% if request.user.is_superuser %}    
+							{% if request.user.is_superuser %}
 								<li><a href="{% url 'dump-data' %}">backup</a></li>
 							{% endif %}
 							{% if request.user.is_staff %}
@@ -112,9 +115,9 @@
 				</ul>
 			</div>
 		</div>
-		
+
 		<!-- javascript here for speed considerations -->
-		
+
 		{% block framework_js %}
 			{% if USE_CDN %}
 				<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js'></script>
@@ -126,7 +129,7 @@
 				<script src="{% static 'momentjs/min/moment.min.js' %}"></script>
 			{% endif %}
 		{% endblock framework_js %}
-		
+
 		{% block widget_js %}
 			{% if USE_CDN %}
 				<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js'></script>
@@ -136,22 +139,22 @@
 			<script src="{% static 'bootstrap-star-rating/js/star-rating.min.js' %}"></script>
             <script src="{% static 'tablesorter/jquery.tablesorter.min.js' %}"></script>
 		{% endblock widget_js %}
-		
+
 		{% block js_settings %}
 			<script>
 				/* get some constants into javascript; provided by base.context.javascript_settings; accessed by document.settings.SETTING_NAME */
 				document.settings = {{ BASE_JS_SETTINGS|json:EXTRA_JS_SETTINGS }};
 			</script>
 		{% endblock js_settings %}
-		
+
 		{% block theme_js %}
             <script src='{% static 'base_script.js' %}'></script>
 		{% endblock theme_js %}
-		
+
 		{% block site_js %}
 			<script src='{% static 'script.js' %}'></script>
 		{% endblock site_js %}
-		
+
 	</body>
 </html>
 

@@ -1,8 +1,8 @@
 
-'''
+"""
 	this signal is sent once each hour if the correct cron job is added
 		python /path/management.py hourly
-'''
+"""
 
 from django.dispatch import Signal
 

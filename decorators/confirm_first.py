@@ -1,15 +1,16 @@
 
-'''
-	decorators that, for a view given post data, shows a page with a message that 
+"""
+	decorators that, for a view given post data, shows a page with a message that
 	lets the user confirm or cancel the action (an extra step as failsafe)
 		@confirm_first('are you sure you want to do this?')
 		def delete_everything(request);
-'''
+"""
 
 from django.shortcuts import render
 
 
 CONFIRM_FIELD_NAME = 'confirmed'
+
 
 def confirm_first(message, subject = '', submit_text = 'continue', submit_class = 'btn-success', confirm_field_name = CONFIRM_FIELD_NAME):
 	def actual_decorator(view_func):

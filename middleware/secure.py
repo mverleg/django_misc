@@ -1,9 +1,9 @@
 
-'''
+"""
 	middleware to redirect certain parts of the site to https
 	http://www.redrobotstudios.com/blog/2010/02/06/requiring-https-for-certain-paths-in-django/
 	alternative to decorators, and the only way for admin and external apps
-'''
+"""
 
 from misc.functions.secure import secure_redirect
 import settings

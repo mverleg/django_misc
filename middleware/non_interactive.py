@@ -1,9 +1,9 @@
 
-'''
+"""
 	shuts down all post requests to the site to make the site static
-	  there could be non-POST interaction, but that's usually a bad idea
-	  use @disable decorator if it exists and you want to disable it anyway
-'''
+	there could be non-POST interaction, but that's usually a bad idea
+	use @disable decorator if it exists and you want to disable it anyway
+"""
 
 from misc.decorators.disable_view import no_interaction_response
 

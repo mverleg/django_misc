@@ -1,18 +1,18 @@
 
-'''
-	filefield that stores the uniquified, uploaded name to a specified (optionally 
+"""
+	filefield that stores the uniquified, uploaded name to a specified (optionally
 	unique) model field (actually, it doesn't even have to be a field, it could
 	just be a model property)
-	
+
 	directory can be specified with Class.UPLOAD_DIR or kwargs upload_to = '/path/'
 	upload field name can be specified by Class.FILENAME_FIELD or kwarg name_field
 	(default to MEDIA_ROOT and 'name' respectively)
-	
+
 	this raises a validation error if in one request (or simultaneous ones), two files
-	with the same name are uploaded, because they'll generate the same .name field 
-	(both availabilities are checked before saving file or instance). However, 
+	with the same name are uploaded, because they'll generate the same .name field
+	(both availabilities are checked before saving file or instance). However,
 	that seems like a pretty rare and useless care; limit new file uploading if worried.
-'''
+"""
 
 from functools import partial
 from os.path import basename, splitext, join

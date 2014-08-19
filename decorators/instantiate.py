@@ -1,16 +1,16 @@
 
-'''
+"""
 	decorator for functions that take a unique model attribute as
-	url parameter (or other string argument), and convert that 
+	url parameter (or other string argument), and convert that
 	into an actual instance of that model as argument for the function
 	e.g. django url sees this function:
 		my_view(request, example_pk)
 	which is defined as
 		@instantiate(Example)
 		def my_view(request, example)
-	uses primary key by default, with modelname as instance kwarg 
+	uses primary key by default, with modelname as instance kwarg
 	and modelname_pk as input string kwargs (can all be changed)
-'''
+"""
 
 from django.http import Http404
 
@@ -36,5 +36,5 @@ def instantiate(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 
 
 def instantiate_slug(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 'slug', model_attr_type = unicode):
 	return instantiate(Model = Model, in_kw_name = in_kw_name, out_kw_name = out_kw_name, model_attr_name = model_attr_name, model_attr_type = model_attr_type)
-	
+
 
