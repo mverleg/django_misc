@@ -1,12 +1,12 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 
-'''
-	show a simple notification
-	possibly inside another view, as confirmation or error
-'''
 def notification(request, message, subject = '', next = None, home_button = True):
+	"""
+		show a simple notification
+		possibly inside another view, as confirmation or error
+	"""
 	return render(request, 'notification.html', {
 		'subject': subject,
 		'message': message,
