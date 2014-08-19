@@ -49,12 +49,39 @@ def sample(collection, limit = 3):
 	"""
 	return list_sample(collection, limit)
 
+
 @register.filter
 def rsample(collection, limit = 3):
 	"""
 		like sample, but uses a random subset of the first 50 items
 	"""
 	return list_sample(sorted(collection[:50], key = lambda x: random()), limit)
+
+
+@register.filter
+def head(text, places = 50):
+	"""
+		get the first part of a string, append '...' if it was truncated
+	"""
+	if len(text) <= places:
+		return text
+	short = ' '.join(text[:places - 2].split(' ')[:-1])
+	if len(short) < max(places * 0.8, places - 10):
+		short = text[:places - 3]
+	return short + '...'
+
+
+@register.filter
+def tail(text, places = 50):
+	"""
+		get the last part of a string, prepend '...' if it was truncated
+	"""
+	if len(text) <= places:
+		return text
+	short = ' '.join(text[-places + 2:].split(' ')[1:])
+	if len(short) < max(places * 0.8, places - 10):
+		short = text[-places + 3:]
+	return '...' + short
 
 
 @register.filter

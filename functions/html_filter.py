@@ -1,21 +1,19 @@
 
-"""
-	filters a string to only allow whitelisted tags
-	argument should be in form 'tag2:attr1:attr2 tag2:attr1 tag3', where tags
-	  are allowed HTML tags, and attrs are the allowed attributes for that tag.
-	http://djangosnippets.org/snippets/1655/
-"""
-
 from re import compile
 from bs4 import BeautifulSoup, Comment
+from lxml.html.clean import clean_html as lxml_clean
 import settings
 
 
 def whitelist_tags(soup, allowed_tags):
 	"""
+		filters a string to only allow whitelisted tags
+		argument should be in form 'tag2:attr1:attr2 tag2:attr1 tag3', where tags
+		are allowed HTML tags, and attrs are the allowed attributes for that tag.
+		http://djangosnippets.org/snippets/1655/
+
 		takes soup, returns text
 	"""
-
 	if not isinstance(soup, BeautifulSoup):
 		soup = BeautifulSoup(unicode(soup))
 
