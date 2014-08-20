@@ -6,7 +6,7 @@ from django.utils.html import escape, mark_safe
 from django import template
 from misc.functions.list_sample import list_sample
 from misc.functions.obfuscate import obfuscate_letter
-from misc.functions.html_filter import html_filter
+from misc.functions.sanitize import sanitize_html
 from random import random
 from json import dumps
 
@@ -90,7 +90,7 @@ def noscr(text):
 		apply a whitelist filter, which allows a limited selection of
 		secure HTML tags and attributes
 	"""
-	return mark_safe(html_filter(text))
+	return mark_safe(sanitize_html(text))
 
 
 @register.filter

@@ -5,14 +5,9 @@ import urlparse
 import settings
 
 
-DEFAULT_NOSCR_ALLOWED_TAGS = 'p:title h1:title h2:title h3:title div:title span:title a:href:title:rel ' + \
-	'img:src:alt:title table:cellspacing:cellpadding thead tbody th tr td:title:colspan:rowspan ol ul li:title br'
-
-	#todo: br -> paragraph
-	#todo: whitelist?
-	# nofollow attribute optional
-	# convert all remaining < and > ?
-	#
+DEFAULT_NOSCR_ALLOWED_TAGS = 'strong:title b i em:title p:title h1:title h2:title h3:title h4:title h5:title ' + \
+	'div:title span:title ol ul li:title a:href:title:rel img:src:alt:title dl td:title dd:title' + \
+	'table:cellspacing:cellpadding thead tbody th tr td:title:colspan:rowspan br'
 
 
 def escape_child_strings(tag, soup):
@@ -30,10 +25,10 @@ def escape_child_strings(tag, soup):
 		return tag
 
 
-@settings.mem_cache
-def sanitize_html(value,
-		allowed_tags = getattr(settings, 'NOSCR_ALLOWED_TAGS', DEFAULT_NOSCR_ALLOWED_TAGS),
-		add_nofollow = False):
+#todo: turn back on (broken now)
+#@settings.mem_cache
+def sanitize_html(text, add_nofollow = False,
+		allowed_tags = getattr(settings, 'NOSCR_ALLOWED_TAGS', DEFAULT_NOSCR_ALLOWED_TAGS)):
 	"""
 		Cleans an html string:
 
@@ -43,6 +38,7 @@ def sanitize_html(value,
 		* remove any < and > from remaining text; this prevents
 			>>> <<script>script> alert("Haha, I hacked your page."); </</script>script>
 		* optionally add nofollow attributes to foreign anchors
+		* removes comments
 		:comment * optionally replace some tags with others:
 
 		:arg text: Input html.
@@ -66,13 +62,13 @@ def sanitize_html(value,
 	allowed_tags = {tag[0]: tag[1:] for tag in allowed_tags}
 
 	""" create comment-free soup """
-	soup = BeautifulSoup(value)
+	soup = BeautifulSoup(text)
 	for comment in soup.findAll(text = lambda text: isinstance(text, Comment)):
 		comment.extract()
 
-	""" hide forbidden tags (keeping content) """
 	for tag in soup.find_all(recursive = True):
 		if tag.name not in allowed_tags:
+			""" hide forbidden tags (keeping content) """
 			tag.hidden = True
 		else:
 			""" whitelisted tags """

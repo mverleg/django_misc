@@ -29,7 +29,7 @@ def test_sanitize_html_hacks():
 
 
 def test_sanitize_html_nofollow():
-	clean = sanitize_html(str3, add_nofollow = True)
+	clean = sanitize_html(str3, True)
 	print clean
 	assert 'author nofollow' in clean
 	assert '"nofollow"' not in clean
@@ -39,8 +39,8 @@ def test_sanitize_html_nofollow():
 
 
 if __name__ == '__main__':
-	print sanitize_html(str1, add_nofollow = True)
-	print sanitize_html(str2, add_nofollow = True)
-	print sanitize_html(str3, add_nofollow = True)
+	print sanitize_html(str1, True)
+	print sanitize_html(str2, True)
+	print sanitize_html(str3, True)
 
 
