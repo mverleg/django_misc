@@ -1,8 +1,40 @@
 
 /*
+	clear float
+*/
+.clear
+{
+	clear: both;
+}
+
+/*
 	upgrade e.g. tr or li containing a href to itself being a clickable element
 */
 .upgrade_anchor:hover
 {
 	cursor: pointer;
 }
+
+/* don't forget clear: both element */
+.list_horizontal, .list_horizontal ul, .list_horizontal ol
+{
+	list-style-type: none;
+	margin: 0;
+}
+
+.list_horizontal li
+{
+	float: left;
+}
+
+.list_horizontal li:not(:last-child)
+{
+	margin-right: 1em;
+}
+
+.list_horizontal_comma li:not(:last-child):after
+{
+	content: ', ';
+}
+
+

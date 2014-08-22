@@ -34,4 +34,29 @@ body
 	padding: 1em 0 2em 0;
 }
 
+.search_form .control-label
+{
+	display: none;
+}
+
+#search_field_big_container
+{
+	position: relative;
+	height: 3.3em;
+}
+
+#search_field_big_container > div
+{
+	position: absolute;
+	left: 0;
+	right: 47px;
+}
+
+#search_field_big_container > button
+{
+	position:
+	absolute; right: 0px;
+}
+
+
 

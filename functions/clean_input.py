@@ -1,6 +1,15 @@
 
 from bs4 import BeautifulSoup
 from re import sub
+from misc.functions.sanitize import sanitize_html
+
+
+def purify_input(text, max_header = 3, add_nofollow = False):
+	"""
+		combination of sanitize_html and clean_input_html
+	"""
+	clean = sanitize_html(text, add_nofollow = add_nofollow)
+	return clean_input_html(clean, max_header = max_header)
 
 
 #todo: caching
