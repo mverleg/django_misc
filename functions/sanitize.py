@@ -1,7 +1,8 @@
 
+from django.utils.safestring import SafeData
 from bs4 import BeautifulSoup, Comment, NavigableString
-from django.utils.html import escape
 import urlparse
+from re import sub, IGNORECASE
 import settings
 
 
@@ -10,7 +11,20 @@ DEFAULT_NOSCR_ALLOWED_TAGS = 'strong:title b i em:title p:title h1:title h2:titl
 	'table:cellspacing:cellpadding thead tbody th tr td:title:colspan:rowspan br'
 
 
-def escape_child_strings(tag, soup):
+def single_escape(text):
+	# DEPRECATED: BEAUTIFULSOUP DOES ESCAPING OF <, >, & ALREADY
+	"""
+		Escapes HTML special characters if not already SafeDate,
+		but attempts to skip those that have already been escaped;
+	"""
+	if isinstance(text, SafeData):
+		return text
+	text = sub(r'&(?!amp|lt|gt|quot|#39)', r'&amp;', text, flags = IGNORECASE)
+	return text.replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace("'", '&#39;')
+
+
+def _escape_child_strings(tag, soup):
+	# DEPRECATED: BEAUTIFULSOUP DOES ESCAPING OF <, >, & ALREADY
 	"""
 		Used by sanitize_html.
 
@@ -20,7 +34,7 @@ def escape_child_strings(tag, soup):
 	"""
 	for child in tag.children:
 		if isinstance(child, NavigableString):
-			clean_text = escape(unicode(child))
+			clean_text = single_escape(unicode(child))
 			child.replace_with(soup.new_string(clean_text))
 		return tag
 
@@ -35,8 +49,8 @@ def sanitize_html(text, add_nofollow = False,
 		* remove any not-whitelisted tags
 			- remove any potentially malicious tags or attributes
 			- remove any invalid tags that may break layout
-		* remove any < and > from remaining text; this prevents
-			>>> <<script>script> alert("Haha, I hacked your page."); </</script>script>
+		* esca[e any <, > and & from remaining text (by bs4); this prevents
+			>>> <<script>script> alert("Haha, I hacked your page."); </</script>script>\
 		* optionally add nofollow attributes to foreign anchors
 		* removes comments
 		:comment * optionally replace some tags with others:
@@ -75,15 +89,15 @@ def sanitize_html(text, add_nofollow = False,
 			tag.attrs = {attr: val for attr, val in tag.attrs.items() if attr in allowed_tags[tag.name]}
 			#""" remove javascript from tags """
 			#tag.attrs = {attr: js_regex.sub('', val) for attr, val in tag.attrs.items()}
-		""" escape string children """
-		escape_child_strings(tag, soup)
+		#""" escape string children """
+		#_escape_child_strings(tag, soup)
 		""" add nofollow to external links if requested """
 		if add_nofollow and tag.name == 'a' and 'href' in tag.attrs:
 			if not is_relative(tag.attrs['href']):
 				tag.attrs['rel'] = (tag.attrs['rel'] if 'rel' in tag.attrs else []) + [u'nofollow']
 
-	""" escape soup for top-level string nodes """
-	escape_child_strings(soup, soup)
+	#""" escape soup for top-level string nodes """
+	#_escape_child_strings(soup, soup)
 
 	""" return as unicode """
 	return soup.renderContents().decode('utf8')

@@ -58,5 +58,30 @@ body
 	absolute; right: 0px;
 }
 
+.search_result
+{
+	margin-top: 1em;
+}
 
+.search_result h2
+{
+	font-size: 140%;
+	margin: 0px;
+}
 
+.search_result p
+{
+	margin: 0px;
+}
+
+.search_pagination
+{
+	text-align: center;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+}
+
+.search_pagination_more
+{
+	margin-top: 1em;
+}
