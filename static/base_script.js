@@ -35,6 +35,25 @@ $(document).ready(function() {
 	$('[autofocus]').each(function(k, elem) {
 		$(elem).select();
 	});
+
+	/*
+		Elements that are hidden until something is clicked (menu's, read-mores, etc...)
+	*/
+	$('.unfold_block').each(function(k, elem) {
+
+		var elem = $(elem)
+		if ($(elem).attr('data-label') == undefined) {
+			console.log('please add data-label to all .unfold_block elements, e.g.', elem);
+			return;
+		};
+		var link = $('<a href="#">' + $(elem).attr('data-label') + '</a>');
+		link.insertBefore(elem);
+		elem.hide();
+		link.click(function(link, elem, event) {
+			link.remove();
+			elem.show();
+		}.bind(null, link, elem));
+	});
 });
 
 

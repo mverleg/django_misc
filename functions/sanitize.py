@@ -39,7 +39,7 @@ def _escape_child_strings(tag, soup):
 		return tag
 
 
-#todo: turn back on (broken now)
+#todo: turn caching back on (broken now)
 #@settings.mem_cache
 def sanitize_html(text, add_nofollow = False,
 		allowed_tags = getattr(settings, 'NOSCR_ALLOWED_TAGS', DEFAULT_NOSCR_ALLOWED_TAGS)):

@@ -1,7 +1,6 @@
 
 """
-	a default form for representing a button that handles something about an instance
-	#todo: make self-displayable?
+	A default form for representing a button that handles something about an instance, e.g. delete.
 """
 
 from misc.forms.crispy import SimpleCrispyForm
@@ -25,10 +24,12 @@ class ObjectButtonForm(SimpleCrispyForm):
 			try:
 				self.instance = self.cls.objects.get(pk = pk)
 			except self.cls.DoesNotExist:
-				raise ValidationError('no %s with pk %d' % (self.cls.__name__, self.pk))
+				raise ValidationError('no %s with pk %d' % (self.cls.__name__, pk))
 		return pk
 
-	def __init__(self, data = None, instance = None, cls = None, url_name = None, submit_name = None, back = None, back_name = None, submit_css = None, back_css = None, small = None, initial = {}, *args, **kwargs):
+	def __init__(self, data = None, instance = None, cls = None, url_name = None, submit_name = None, back = None, back_name = None, submit_css = None, back_css = None, small = None, initial = None, *args, **kwargs):
+		if initial is None:
+			initial = {}
 		if instance and not cls:
 			cls = type(instance)
 		if small is None:
@@ -36,11 +37,10 @@ class ObjectButtonForm(SimpleCrispyForm):
 		if small:
 			submit_css = ('%s btn-xs' % submit_css).strip()
 		self.cls = cls
-		if not 'pk' in initial:
-			if hasattr(instance, 'pk'):
-				initial['pk'] = instance.pk
-			elif not instance is None:
+		if not 'pk' in initial and instance is not None:
+			if not hasattr(instance, 'pk'):
 				raise Exception('no primary key supplied and instance of %s does not have one' % type(instance))
+			initial['pk'] = instance.pk
 		super(ObjectButtonForm, self).__init__(data = data, url_name = url_name, submit_name = submit_name, back = back, back_name = back_name, submit_css = submit_css, back_css = back_css, *args, initial = initial, **kwargs)
 
 	'''

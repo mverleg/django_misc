@@ -1,0 +1,29 @@
+
+{% extends BASE_TEMPLATE %}
+
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+	{{ subject }}
+	{{ TITLE_SEPARATOR }}
+	{{ block.super }}
+{% endblock title %}
+
+{% block content %}
+
+	{% if subject %}
+		<h1>{{ subject|safe }}</h1>
+	{% endif %}
+
+	{% if form.is_valid %}
+		<p>Please complete the below form:</p>
+	{% else %}
+		<p>Please correct the errors in the below form and submit again:</p>
+	{% endif %}
+
+	{% crispy form %}
+
+{% endblock content %}
+
+
