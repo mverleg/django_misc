@@ -52,6 +52,7 @@ $(document).ready(function() {
 		link.click(function(link, elem, event) {
 			link.remove();
 			elem.show();
+			event.preventDefault();
 		}.bind(null, link, elem));
 	});
 });
