@@ -1,7 +1,7 @@
 
-'''
+"""
 	add this one to cron hourly so as to fire the signal that other apps can use
-'''
+"""
 
 from django.core.management.base import BaseCommand
 from misc.signals.hourly import hourly

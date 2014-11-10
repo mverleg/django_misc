@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
 	/*
-		upgrade e.g. tr or li containing a href to itself being a clickable element
+		Upgrade e.g. tr or li containing a href to itself being a clickable element.
 	*/
 	$('.upgrade_anchor').each(function(k, elem) {
 
@@ -20,7 +20,16 @@ $(document).ready(function() {
 	});
 
 	/*
-		make tables marked as such sortable (for different settings, use your own class)
+		de-obfuscate obfuscated text, such as email addresses
+	*/
+	$('.obfuscated').each(function(k) {
+		var cypher = $(this).find('span').get(0).innerHTML;
+		var clear = deobfuscate(cypher);
+		$(this).replaceWith(clear);
+	});
+
+	/*
+		Make tables marked as such sortable (for different settings, use your own class).
 	*/
 	$('.table-sortable').each(function(k, elem) {
 
@@ -56,5 +65,31 @@ $(document).ready(function() {
 		}.bind(null, link, elem));
 	});
 });
+
+/*
+	'fix' modulo (use the mathematical definition for negative numbers)
+	http://stackoverflow.com/questions/4467539/javascript-modulo-not-behaving
+*/
+function mod(a, n)
+{
+	return a - (n * Math.floor(a/n));
+}
+function deobfuscate_letter(letter, pos)
+{
+	var encchars = document.settings.ENCCHARS
+	var nr = encchars.indexOf(letter);
+	if (nr < 0) { return letter; }
+	oldnr = mod(nr - pos*pos - 42, encchars.length)
+	return encchars.charAt(oldnr);
+}
+function deobfuscate(text, pos)
+{
+	var clear = '';
+	for (var i = 0; i < text.length; i += 1)
+	{
+		clear += deobfuscate_letter(text[i], i)
+	}
+	return clear
+}
 
 

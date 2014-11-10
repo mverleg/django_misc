@@ -94,6 +94,9 @@
 
 		<div id='footer_area' {% block footer_area_attr %}{% endblock footer_area_attr %}>
 			<div id='footer' {% block footer_attr %}{% endblock footer_attr %}>
+				<div id='name' {% block name_attr %}{% endblock name_attr %}>
+					{% block page_name %}{{ TITLE_BASE }}{% endblock page_name %}
+				</div>
 				<ul {% block footer_list_attr %}{% endblock footer_list_attr %}>
 					{% block page_footer %}
 						{% block footer_admin %}

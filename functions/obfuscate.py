@@ -2,17 +2,17 @@
 from random import shuffle
 
 
-'''
+"""
 	symbols that will be obfuscated (others will remain identical)
-'''
+"""
 ENCCHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?_@+-*'
 
 
-'''
-	obfuscate a single letter; not cryptographically strong
-	but simple and should be good enough to stop some spam bots  
-'''
 def obfuscate_letter(letter, pos, encchars = ENCCHARS):
+	"""
+		obfuscate a single letter; not cryptographically strong but simple and should be good enough to stop some spam
+		bots.
+	"""
 	try:
 		nr = encchars.index(letter)
 	except ValueError:
@@ -21,8 +21,10 @@ def obfuscate_letter(letter, pos, encchars = ENCCHARS):
 	return encchars[newnr]
 
 
-''' the inverse is not actually used in python, just js version '''
 def deobfuscate_letter(letter, pos, encchars = ENCCHARS):
+	"""
+		the inverse is not actually used in python, just js version
+	"""
 	try:
 		nr = encchars.index(letter)
 	except ValueError:

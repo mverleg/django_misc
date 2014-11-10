@@ -5,12 +5,18 @@ body
 	padding-botton: 34px;
 }
 
+#footer > #name
+{
+	float: left;
+	font-style: italic;
+}
+
 #footer > ul
 {
 	float: right;
 }
 
-#footer > ul li
+#footer > ul li, #footer > #name
 {
 	margin: .5em 0 .7em .5em;
 	padding: 0 .7em 0 0;

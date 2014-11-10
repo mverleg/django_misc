@@ -1,40 +1,8 @@
 
-/*
-	'fix' modulo (use the mathematical definition for negative numbers)
-	http://stackoverflow.com/questions/4467539/javascript-modulo-not-behaving
-*/
-function mod(a, n)
-{
-	return a - (n * Math.floor(a/n));
-}
-function deobfuscate_letter(letter, pos)
-{
-	var encchars = document.settings.ENCCHARS
-	var nr = encchars.indexOf(letter);
-	if (nr < 0) { return letter; }
-	oldnr = mod(nr - pos*pos - 42, encchars.length)
-	return encchars.charAt(oldnr);
-}
-function deobfuscate(text, pos)
-{
-	var clear = '';
-	for (var i = 0; i < text.length; i += 1)
-	{
-		clear += deobfuscate_letter(text[i], i)
-	}
-	return clear
-}
+
 
 $(document).ready(function() {
-	/*
-		de-obfuscate obfuscated text, such as email addresses
-	*/
-	$('.obfuscated').each(function(k) {
-		var cypher = $(this).find('span').get(0).innerHTML;
-		var clear = deobfuscate(cypher);
-		$(this).replaceWith(clear);
-	});
-	
+
 	/*
 		upgrade link menus
 	*/
@@ -44,10 +12,10 @@ $(document).ready(function() {
 			window.location.href = url;
 		}.bind(null, url));
 	});
-	
+
 	/*
 		update classes and html to make datepicker work
-		
+
 	*/
 	$('.datetimeinput').each(function(k) {
 		$(this).parent().addClass('input-group date insert-datetimeinput');
@@ -70,7 +38,7 @@ $(document).ready(function() {
 	$('.insert-datetimeinput').each(function(k) {
 		$(this).datetimepicker({
 			format: document.settings.DATETIME_INPUT_FORMAT,
-			sideBySide: true, 
+			sideBySide: true,
 			showToday: true,
 			minuteStepping: 5,
 			useSeconds: false,
