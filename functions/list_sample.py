@@ -8,8 +8,8 @@ def list_sample(collection, limit = 3):
 	ln = len(collection)
 	if ln > 1:
 		if ln <= limit:
-			return '%s and %s' % (', '.join(unicode(ws) for ws in collection[:min(limit, ln)]), collection[min(limit, ln)])
-		return '%s and %d others' % (', '.join(unicode(ws) for ws in collection[:min(limit, ln)]), ln - limit)
+			return '%s and %s' % (', '.join(str(ws) for ws in collection[:min(limit, ln)]), collection[min(limit, ln)])
+		return '%s and %d others' % (', '.join(str(ws) for ws in collection[:min(limit, ln)]), ln - limit)
 	if ln > 0:
 		return collection[0]
 	return ''
@@ -20,7 +20,7 @@ def list_sample_special(collection, special_item, special_name = 'you', limit = 
 		special version with 'special_name' as first extra item where applicable
 	"""
 	def jcs(items):
-		return ', '.join(unicode(item) for item in items)
+		return ', '.join(str(item) for item in items)
 	try:
 		collection.remove(special_item)
 		has_special = True

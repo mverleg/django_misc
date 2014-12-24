@@ -55,9 +55,9 @@ def clean_input_html(text, max_header = 3):
 		for element in soup.find_all(recursive = True, text = True):
 			txt = element.string
 			if element.next_sibling is None:
-				txt = unicode(txt).rstrip()
+				txt = str(txt).rstrip()
 			if element.previous_sibling is None:
-				txt = unicode(txt).lstrip()
+				txt = str(txt).lstrip()
 			if txt:
 				element.replace_with(soup.new_string(txt))
 			else:

@@ -37,14 +37,14 @@ if __name__ == '__main__':
 	initial = list('~!@#$%^&*()_+`1234567890-=[]\{}|;\':"<>?,./qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM')
 	shuffle(initial)
 	initial = ''.join(initial)
-	print 'testing obfuscation for %s' % initial
+	print('testing obfuscation for %s' % initial)
 	obfuscated = ''.join(obfuscate_letter(letter, k) for k, letter in enumerate(initial))
-	print 'obfuscated: %s' % obfuscated
+	print('obfuscated: %s' % obfuscated)
 	restored = ''.join(deobfuscate_letter(letter, k) for k, letter in enumerate(obfuscated))
-	print 'restored: %s' % restored
+	print('restored: %s' % restored)
 	if restored == initial:
-		print 'SUCCESS'
+		print('SUCCESS')
 	else:
-		print 'FAILED!'
+		print('FAILED!')
 
 

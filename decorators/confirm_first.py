@@ -29,7 +29,7 @@ def confirm_first(message, subject = '', submit_text = 'continue', submit_class 
 					elif 'next' in request.POST:
 						cancel_url = request.POST['next']
 					return render(request, 'confirm_first.html', {
-						'post': request.POST.items(),
+						'post': list(request.POST.items()),
 						'subject': subject,
 						'message': message,
 						'cancel_url': cancel_url,

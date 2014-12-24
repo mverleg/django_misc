@@ -13,7 +13,7 @@ def limit_rate(itercount = 100, waittime = 1., showmsg = False):
 			limit_rate.iter += 1
 			if limit_rate.iter >= itercount:
 				if showmsg:
-					print 'sleep %.3fs after %d steps' % (waittime, limit_rate.iter)
+					print('sleep %.3fs after %d steps' % (waittime, limit_rate.iter))
 				sleep(waittime)
 				limit_rate.iter = 0
 			return func(*args, **kwargs)

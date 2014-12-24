@@ -8,8 +8,8 @@ from django.core.urlresolvers import reverse
 
 def BaseFormHelper(url_name = None, submit_name = 'submit', submit_css = '', back = '', back_name = 'back', back_css = 'btn_danger'):
 	"""
-		the default actions already implemented, but not overriding __init__ so that you
-		can add more actions (actually a generator, not a class)
+		The default actions already implemented, but not overriding __init__ so that you
+		can add more actions (actually a generator, not a class).
 	"""
 	helper = FormHelper()
 	if url_name:
@@ -17,7 +17,7 @@ def BaseFormHelper(url_name = None, submit_name = 'submit', submit_css = '', bac
 	if back:
 		#todo: this should work without javascript
 		helper.add_input(Button('', back_name, onclick = 'location.href=\'%s\'' % reverse(back), css_class = back_css, tabindex = -1))
-	''' it is not advisable to use 'submit' or 'post' as input names, because jquery gets confused  '''
+	""" It is not advisable to use 'submit' or 'post' as input names, because jquery gets confused. """
 	if submit_name:
 		helper.add_input(Submit('', submit_name, css_class = submit_css))
 	return helper
@@ -25,7 +25,7 @@ def BaseFormHelper(url_name = None, submit_name = 'submit', submit_css = '', bac
 
 class SimpleCrispyForm(Form):
 	"""
-		a simply form (like 80%) with just an action and a submit button (possibly a back button)
+		A simply form (like 80%) with just an action and a submit button (possibly a back button).
 	"""
 
 	next = forms.CharField(max_length = 64, widget = forms.HiddenInput, required = False, initial = '')
@@ -51,7 +51,7 @@ class SimpleCrispyForm(Form):
 
 class SimpleCrispyModelForm(ModelForm):
 	"""
-		modelform version of SimpleCrispyForm
+		ModelForm version of SimpleCrispyForm.
 	"""
 
 	next = forms.CharField(max_length = 64, widget = forms.HiddenInput, required = False, initial = '')
@@ -76,7 +76,7 @@ class SimpleCrispyModelForm(ModelForm):
 
 
 class ReadonlyFormMixin(object):
-	""" needs to come before Form / ModelForm """
+	""" Needs to come before Form / ModelForm """
 
 	URL_NAME = SUBMIT_NAME = BACK_NAME = ''
 

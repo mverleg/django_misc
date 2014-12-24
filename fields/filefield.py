@@ -33,7 +33,7 @@ def filename_to_name_field(instance, filename, upload_dir, name_field):
 class AutoNameFileField(FileField):
 	def __init__(self, name_field = 'name', *args, **kwargs):
 		if 'upload_to' in kwargs:
-			if not isinstance('upload_to', basestring):
+			if not isinstance('upload_to', str):
 				raise Exception('for %(cls)s, \'upload_to\' should be a string pointing to a directory, not a callable, as %(cls)s determines the filename')
 			upload_dir = kwargs.pop('upload_to')
 		else:

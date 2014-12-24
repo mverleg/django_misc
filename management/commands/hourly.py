@@ -14,7 +14,7 @@ class Command(BaseCommand):
 	    'it will send a custom signal that other apps can listen for'
 
 	def handle(self, verbosity, *args, **options):
-		print 'sending hourly signal'
+		print('sending hourly signal')
 		hourly.send(sender = None, last_app = 'misc', verbosity = verbosity, interactive = False)
 
 

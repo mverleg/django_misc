@@ -20,6 +20,6 @@ str2 = '''<div><strong>hi</strong></div>'''
 
 
 if __name__ == '__main__':
-	print clean_input_html(sanitize_html(str1, True))
+	print(clean_input_html(sanitize_html(str1, True)))
 
 

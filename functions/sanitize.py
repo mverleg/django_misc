@@ -1,7 +1,7 @@
 
 from django.utils.safestring import SafeData
 from bs4 import BeautifulSoup, Comment, NavigableString
-import urlparse
+import urllib.parse
 from re import sub, IGNORECASE
 import settings
 
@@ -34,7 +34,7 @@ def _escape_child_strings(tag, soup):
 	"""
 	for child in tag.children:
 		if isinstance(child, NavigableString):
-			clean_text = single_escape(unicode(child))
+			clean_text = single_escape(str(child))
 			child.replace_with(soup.new_string(clean_text))
 		return tag
 
@@ -65,7 +65,7 @@ def sanitize_html(text, add_nofollow = False,
 
 	""" function to check if urls are absolute
 		note that example.com/path/file.html is relative, officially and in Firefox """
-	is_relative = lambda url: not bool(urlparse.urlparse(url).netloc)
+	is_relative = lambda url: not bool(urllib.parse.urlparse(url).netloc)
 
 	""" regex to remove javascript """
 	#todo: what exactly is the point of this? is there js in attribute values?
@@ -94,7 +94,7 @@ def sanitize_html(text, add_nofollow = False,
 		""" add nofollow to external links if requested """
 		if add_nofollow and tag.name == 'a' and 'href' in tag.attrs:
 			if not is_relative(tag.attrs['href']):
-				tag.attrs['rel'] = (tag.attrs['rel'] if 'rel' in tag.attrs else []) + [u'nofollow']
+				tag.attrs['rel'] = (tag.attrs['rel'] if 'rel' in tag.attrs else []) + ['nofollow']
 
 	#""" escape soup for top-level string nodes """
 	#_escape_child_strings(soup, soup)

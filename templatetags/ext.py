@@ -100,7 +100,7 @@ def json(obj, extra1 = None, extra2 = None, extra3 = None, extra4 = None, extra5
 		note that this should only be used with trusted data (otherwise cross-site-script vulnerable)
 		note also that *extra apparently does not work for template tags for some reason
 	"""
-	for extra in filter(None, (extra1, extra2, extra3, extra4, extra5,)):
+	for extra in [_f for _f in (extra1, extra2, extra3, extra4, extra5,) if _f]:
 		try:
 			obj.update(extra)
 		except (TypeError, AttributeError):
@@ -158,6 +158,6 @@ def upto(text, delimiter = None):
 	"""
 		idea by /admin/admin_settings/setting/
 	"""
-	return unicode(text).split(delimiter)[0]
+	return str(text).split(delimiter)[0]
 
 

@@ -34,7 +34,7 @@ def instantiate(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 
 	return convert_to_instance_decorator
 
 
-def instantiate_slug(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 'slug', model_attr_type = unicode):
+def instantiate_slug(Model, in_kw_name = None, out_kw_name = None, model_attr_name = 'slug', model_attr_type = str):
 	return instantiate(Model = Model, in_kw_name = in_kw_name, out_kw_name = out_kw_name, model_attr_name = model_attr_name, model_attr_type = model_attr_type)
 
 
