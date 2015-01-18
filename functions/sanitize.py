@@ -1,7 +1,10 @@
 
 from django.utils.safestring import SafeData
 from bs4 import BeautifulSoup, Comment, NavigableString
-import urllib.parse
+try:
+	from urllib.parse import urlparse
+except ImportError:
+	from urlparse import urlparse
 from re import sub, IGNORECASE
 import settings
 
@@ -65,7 +68,7 @@ def sanitize_html(text, add_nofollow = False,
 
 	""" function to check if urls are absolute
 		note that example.com/path/file.html is relative, officially and in Firefox """
-	is_relative = lambda url: not bool(urllib.parse.urlparse(url).netloc)
+	is_relative = lambda url: not bool(urlparse(url).netloc)
 
 	""" regex to remove javascript """
 	#todo: what exactly is the point of this? is there js in attribute values?
