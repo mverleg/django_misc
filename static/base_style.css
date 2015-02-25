@@ -22,6 +22,9 @@
 	margin: 0;
 }
 
+/*
+	Horizontal lists (for menus etc)
+*/
 .list_horizontal li
 {
 	float: left;
@@ -35,6 +38,29 @@
 .list_horizontal_comma li:not(:last-child):after
 {
 	content: ', ';
+}
+
+/*
+	Tricks and foolishness
+*/
+.hover_show span
+{
+	visibility: hidden;
+	cursor: zoom-in;
+}
+
+.hover_show:hover span
+{
+	visibility: visible;
+}
+
+.linkstyle_button
+{
+	background: none;
+	border: none;
+	text-decoration: underline;
+	cursor: pointer;
+	padding: 0px;
 }
 
 
