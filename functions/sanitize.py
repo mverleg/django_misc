@@ -2,11 +2,9 @@
 from django.utils.safestring import SafeData
 from bs4 import BeautifulSoup, Comment, NavigableString
 try:
-	from urllib.request import urlopen
 	from urllib.parse import urlparse
 except ImportError:
 	from urlparse import urlparse
-	from urllib import urlopen
 from re import sub, IGNORECASE
 import settings
 
