@@ -45,6 +45,6 @@ def confirm_first(message, subject = '', submit_text = 'continue', submit_class 
 
 
 confirm_delete = confirm_first(message = 'Are you sure you want to delete this item?', subject = 'Delete?',
-	submit_text = 'delete', submit_class = 'btn-danger', confirm_field_name = CONFIRM_FIELD_NAME)
+	submit_text = 'delete', submit_class = 'btn-danger')
 
 
