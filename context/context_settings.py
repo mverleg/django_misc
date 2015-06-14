@@ -1,5 +1,5 @@
 
-import settings
+from django.conf import settings
 
 
 def context_settings(request):
