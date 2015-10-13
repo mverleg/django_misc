@@ -92,4 +92,22 @@ function deobfuscate(text, pos)
 	return clear
 }
 
+function fsize_unit(sz)
+{
+	/*
+		Display  filesizes as e.g. 53 B, 0.9 kB, 1.3 MB or 27 GB
+		http://stackoverflow.com/questions/10420352/converting-file-size-in-bytes-to-human-readable
+	*/
+	var i = 0;
+	var unit = ['B', 'kB', 'MB', 'GB', 'TB'];
+	while (sz > 103)
+	{
+		sz = sz / 1024;
+		i++;
+	}
+	console.log(sz);
+	sz = sz.toFixed(sz > 20 ? 0: 1);
+	console.log(sz);
+	return sz + ' ' + unit[i];
+}
 
