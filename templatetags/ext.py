@@ -4,6 +4,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
 from django import template
+from django.utils.timesince import timesince
 from misc.functions.list_sample import list_sample
 from misc.functions.obfuscate import obfuscate_letter
 from misc.functions.sanitize import sanitize_html
@@ -159,5 +160,14 @@ def upto(text, delimiter = None):
 		idea by /admin/admin_settings/setting/
 	"""
 	return str(text).split(delimiter)[0]
+
+
+@register.filter
+def since_short(text):
+	"""
+		Shorter version of |timesince. Makes sure there is only one unit. Also shortens 'minutes' and 'hours',
+		so results are shorter in English but should still work in other language.
+	"""
+	return timesince(str(text)).split(',')[0].strip().replace('minutes', 'min').replace('hours', 'hr')
 
 
