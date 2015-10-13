@@ -2,6 +2,8 @@
 {% extends BASE_TEMPLATE %}
 
 
+{% block menu_autofocus %}{% endblock menu_autofocus %}
+
 {% block title %}
 	{{ subject }}
 	{{ TITLE_SEPARATOR }}
@@ -20,7 +22,7 @@
         {% for key,val in post %}
             <input type="hidden" name="{{ key }}" value="{{ val }}" />
         {% endfor %}
-        <input type="hidden" name="{{ confirm_field_name }}" value="confirmed" />
+        <input type="hidden" name="{{ confirm_field_name }}" value="confirmed" autofocus />
         <a href="{{ cancel_url }}" class="btn btn-default">cancel</a>
         <input type="submit" class="btn btn-default {{ submit_class }}" value="{{ submit_text }}" />
 	</form>
