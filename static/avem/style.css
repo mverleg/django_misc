@@ -1,8 +1,67 @@
 
+
+/*
+	clear float
+*/
+.clear
+{
+	clear: both;
+}
+
+/* don't forget clear: both element */
+.list_horizontal, .list_horizontal ul, .list_horizontal ol
+{
+	list-style-type: none;
+	margin: 0;
+}
+
+/*
+	Horizontal lists (for menus etc)
+*/
+.list_horizontal li
+{
+	float: left;
+}
+
+.list_horizontal li:not(:last-child)
+{
+	margin-right: 1em;
+}
+
+.list_horizontal_comma li:not(:last-child):after
+{
+	content: ', ';
+}
+
+/*
+	Tricks and foolishness
+*/
+.hover_show span
+{
+	visibility: hidden;
+	cursor: zoom-in;
+}
+
+.hover_show:hover span
+{
+	visibility: visible;
+}
+
+.linkstyle_button
+{
+	background: none;
+	border: none;
+	text-decoration: underline;
+	cursor: pointer;
+	padding: 0;
+}
+
+/* ************************************** */
+
 body
 {
 	padding-top: 50px;
-	padding-botton: 34px;
+	padding-bottom: 34px;
 }
 
 #footer > #name
@@ -61,7 +120,7 @@ body
 #search_field_big_container > button
 {
 	position:
-	absolute; right: 0px;
+	absolute; right: 0;
 }
 
 .search_result
@@ -72,12 +131,12 @@ body
 .search_result h2
 {
 	font-size: 140%;
-	margin: 0px;
+	margin: 0;
 }
 
 .search_result p
 {
-	margin: 0px;
+	margin: 0;
 }
 
 .search_pagination
@@ -90,4 +149,11 @@ body
 .search_pagination_more
 {
 	margin-top: 1em;
+}
+
+.large-dropdown
+{
+	/* larger dropdown for forms, like login */
+	min-width: 25em;
+	padding: 1.5em 1.5em 0 1.5em;
 }

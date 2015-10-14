@@ -1,12 +1,11 @@
 
-{% extends 'frame.html' %}
+{% extends 'avem/frame.html' %}
 
 {% comment %}
 	this theme is based on twitter bootstrap
 {% endcomment %}
 
 {% load staticfiles %}
-{% load statix_tags %}
 {% load ext %}
 
 
@@ -15,85 +14,138 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 {% endblock extra_meta %}
 
-{% block theme_css %}f
-    {{ block.super }}
-	<link rel='stylesheet' href='{% static 'avem/style.css' %}' />
-{% endblock theme_css %}
+{% block site_css %}
+	<link rel='stylesheet' href='{% static 'style.css' %}' />
+{% endblock site_css %}
 
-{% block theme_js %}
-    {{ block.super }}
-	<script src="{% static 'avem/script.js' %}"></script>
-{% endblock theme_js %}
+{% block site_js %}
+	<script src="{% static 'script.js' %}"></script>
+{% endblock site_js %}
 
 {% block page_attr %}{{ block.super }} class='container'{% endblock page_attr %}
 
 {% block main_menu %}
+
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" id="menubar-toggle-collapse" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_general" aria-expanded="false">
+					<span class="sr-only">Toggle menu</span>
+					<i class="glyphicon glyphicon-chevron-down"></i>
+				</button>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_account" aria-expanded="false">
+					<span class="sr-only">Toggle account options</span>
+					<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}account{% else %}login{% endif %} <b class="caret"></b>
+				</button>
+				{% block menu_home %}
+					<a class="navbar-brand" href="{% url 'home' %}"><i class="glyphicon glyphicon-home"></i> {% block brand_name %}markv{% endblock brand_name %}</a>
+				{% endblock menu_home %}
+			</div>
 
-			{% block menu_home %}
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="{% url 'home' %}"><i class="glyphicon glyphicon-home"></i> {% block brand_name %}home{% endblock brand_name %}</a>
+			<!-- Account options for small displays: a second collapse item -->
+			<div class="hidden-lg hidden-md hidden-sm visible-xs">
+				<div class="collapse navbar-collapse" id="menu_account">
+					<ul class="nav navbar-nav">
+						{% if request.user.is_authenticated %}
+							{% include 'account_menu_items.html' %}
+						{% else %}
+							{% include 'login_menu_items.html' %}
+						{% endif %}
+					</ul>
 				</div>
-			{% endblock menu_home %}
+			</div>
 
-			<div class="collapse navbar-collapse">
+			<!-- Account options for large displays: a normal dropdown menu -->
+			<div class="visisble-lg visisble-md visisble-sm hidden-xs">
+				<ul class="nav navbar-nav navbar-right navbar-nocollapse">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}account{% else %}login{% endif %} <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu {% if not request.user.is_authenticated %}large-dropdown{% endif %}">
+							{% if request.user.is_authenticated %}
+								{% include 'account_menu_items.html' %}
+							{% else %}
+								{% include 'login_menu_items.html' %}
+							{% endif %}
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Search for medium devices as a button with dropdown formfield (the other one is inside collapse) -->
+			<div class="hidden-lg hidden-md visible-sm hidden-xs"> {# todo: also for md? #}
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" id="menu-search-dropdown-button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							<i class="glyphicon glyphicon-search"></i> search
+							<span class="caret"></span>
+						</a>
+						<ul id="menu-search-dropdown" class="dropdown-menu large-dropdown"> {# todo where is the actual form? #}
+							<form action="{% url 'search' %}" method="GET">
+								<li class="form-group">
+									<div class="input-group">
+										<input id="search_field" type="text" name="q" class="form-control" placeholder="Search">
+										<div class="input-group-btn" >
+											<label class="btn btn-default" for="search_submit_dropdown">
+												<i class="glyphicon glyphicon-search"></i>
+											</label>
+										</div>
+									</div>
+								</li>
+								<input type="submit" style="display: none;" id="search_submit_dropdown" />
+							</form>
+						</ul>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="menu_general">
 				<ul class="nav navbar-nav">
 					{% block menu_info %}
-						<li class="{% if_url_statix 'about' %}"><a href='{% statix_url 'about' %}'><i class="glyphicon glyphicon-heart"></i> about</a></li>
 					{% endblock menu_info %}
 					{% block menu %}
 						<!-- add menu items here -->
 					{% endblock menu %}
 				</ul>
 
-				<ul class="nav navbar-nav navbar-right">
-					{% block menu_auth %}
-						{% if request.user.is_authenticated %}
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> account <b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li class="{% if_url 'profile_info' %}"><a href='{% url 'profile_info' %}'><i class="glyphicon glyphicon-user"></i> account</a></li>
-									<li class="{% if_url 'profile_password' %}"><a href='{% url 'profile_password' %}'><i class="glyphicon glyphicon-lock"></i> password</a></li>
-									<li class="{% if_url 'profile_settings' %}"><a href='{% url 'profile_settings' %}'><i class="glyphicon glyphicon-cog"></i> settings</a></li>
-									<li class="{% if_url 'logout' %}"><a href='{% url 'logout' %}?next={{ request.path }}'><i class="glyphicon glyphicon-off"></i> logout</a></li>
-								</ul>
-							</li>
-						{% else %}
-							<li class="{% if_url 'login' %}"><a href="{% url 'login' %}?next={{ request.path }}"><i class="glyphicon glyphicon-user"></i> login</a></li>
-						{% endif %}
-					{% endblock menu_auth %}
-				</ul>
-
-				{% block search_box %}
-					<form class="navbar-form navbar-right" role="search" method="GET" action="{% url 'search' %}">
-						<div class="form-group">
-							<input name="q" type="text" class="form-control" placeholder="search..." {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
-						</div>
-						<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-					</form>
-				{% endblock search_box %}
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+				<!-- Search for very large (in bar) or very small (in collapse) sites -->
+				<span class="visible-lg visible-md hidden-sm visible-xs">
+					<div id="menu-search-mainbar" class="nav navbar-form navbar-right">
+						<form class="form-inline" role="search">
+							<form action="{% url 'search' %}" method="GET">
+								<div class="form-group">
+									<div class="input-group">
+										<input id="search_field" type="text" name="q" class="form-control" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
+										<div class="input-group-btn" onclick="">
+											<label class="btn btn-default" for="search_submit_bar">
+												<i class="glyphicon glyphicon-search"></i>
+											</label>
+										</div>
+									</div>
+								</div>
+								<input type="submit" style="display: none;" id="search_submit_bar" />
+							</form>
+						</form>
+					</div>
+				</span>
+			</div>
+		</div>
 	</nav>
 {% endblock main_menu %}
 
 {% block content_area %}
 	<div class="row">
-		<div class="col-xs-8">
+		<div class="col-xs-12 col-md-8">
 			{% block content %}
 				empty document for avem/base.html
 			{% endblock content %}
 		</div>
-		<div class="col-xs-4">
+		<div class="col-xs-12 col-md-4">
 			{% block sidebar %}
-				sidebar! width 4/12
+				<!-- nothing here -->
 			{% endblock sidebar %}
 		</div>
 	</div>
