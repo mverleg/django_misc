@@ -9,8 +9,8 @@
 """
 
 from json import dumps, loads
+from django.conf import settings
 from django.http import HttpResponse
-from settings import DEBUG
 
 
 def json_input(func):
@@ -21,7 +21,7 @@ def json_input(func):
 
 
 class JSONResponse(HttpResponse):
-	def __init__(self, request, data, indent = 2 if DEBUG else None, status_code = 200, content_type = 'application/json', mime = None, **json_kwargs):
+	def __init__(self, request, data, indent = 2 if settings.DEBUG else None, status_code = 200, content_type = 'application/json', mime = None, **json_kwargs):
 		if mime is not None:
 			content_type = mime
 		content = dumps(data, indent = indent, **json_kwargs)

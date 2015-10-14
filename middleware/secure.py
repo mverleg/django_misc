@@ -5,8 +5,8 @@
 	alternative to decorators, and the only way for admin and external apps
 """
 
+from django.conf import settings
 from misc.functions.secure import secure_redirect
-import settings
 
 
 class RequireSecureMiddleware(object):

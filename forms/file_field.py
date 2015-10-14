@@ -16,9 +16,9 @@
 
 from functools import partial
 from os.path import basename, splitext, join
+from django.conf import settings
 from django.utils.text import slugify
 from django.db.models import FileField, ImageField
-from settings import MEDIA_ROOT
 
 
 def filename_to_name_field(instance, filename, upload_dir, name_field):
@@ -37,7 +37,7 @@ class AutoNameFileField(FileField):
 				raise Exception('for %(cls)s, \'upload_to\' should be a string pointing to a directory, not a callable, as %(cls)s determines the filename')
 			upload_dir = kwargs.pop('upload_to')
 		else:
-			upload_dir = getattr(self, 'UPLOAD_DIR', MEDIA_ROOT)
+			upload_dir = getattr(self, 'UPLOAD_DIR', settings.MEDIA_ROOT)
 		upload_func = partial(filename_to_name_field, upload_dir = upload_dir, name_field = name_field)
 		super(AutoNameFileField, self).__init__(self, *args, upload_to = upload_func, **kwargs)
 
