@@ -96,7 +96,7 @@ function deobfuscate_letter(letter, pos)
 	var encchars = document.settings.ENCCHARS;
 	var nr = encchars.indexOf(letter);
 	if (nr < 0) { return letter; }
-	oldnr = mod(nr - pos*pos - 42, encchars.length);
+	var oldnr = mod(nr - pos*pos - 42, encchars.length);
 	return encchars.charAt(oldnr);
 }
 

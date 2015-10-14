@@ -83,9 +83,8 @@ body
 
 #footer > ul li:not(:last-child)
 {
-	border-style: solid;
+	border: solid #E7E7E7;
 	border-right-width: 1px;
-	border-color: #E7E7E7;
 }
 
 #footer_area

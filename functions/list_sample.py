@@ -44,6 +44,6 @@ def list_sample_special(collection, special_item, special_name = 'you', limit = 
 		return '%s and %s' % (jcs(collection[:-1]), collection[-1])
 	if has_special:
 		return '%s, %s and %d other%s' % (special_name, jcs(collection[:limit]), ln - limit, 's' if ln - limit > 1 else '')
-	return '%s and %d other%' % (jcs(collection[:limit]), ln - limit, 's' if ln - limit > 1 else '')
+	return '%s and %d other%s' % (jcs(collection[:limit]), ln - limit, 's' if ln - limit > 1 else '')
 
 

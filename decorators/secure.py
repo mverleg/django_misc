@@ -6,7 +6,7 @@
 """
 
 from misc.functions.secure import secure_redirect
-import settings
+from django.conf import settings
 
 
 def redirect_to_secure(view_func):

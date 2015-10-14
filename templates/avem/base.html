@@ -83,8 +83,8 @@
 							<span class="caret"></span>
 						</a>
 						<ul id="menu-search-dropdown" class="dropdown-menu large-dropdown"> {# todo where is the actual form? #}
-							<form action="{% url 'search' %}" method="GET">
-								<li class="form-group">
+							<li class="form-group">
+								<form action="{% url 'search' %}" method="GET">
 									<div class="input-group">
 										<input id="search_field" type="text" name="q" class="form-control" placeholder="Search">
 										<div class="input-group-btn" >
@@ -93,9 +93,9 @@
 											</label>
 										</div>
 									</div>
-								</li>
-								<input type="submit" style="display: none;" id="search_submit_dropdown" />
-							</form>
+									<input type="submit" style="display: none;" id="search_submit_dropdown" />
+								</form>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -112,7 +112,7 @@
 				</ul>
 
 				<!-- Search for very large (in bar) or very small (in collapse) sites -->
-				<span class="visible-lg visible-md hidden-sm visible-xs">
+				<div class="visible-lg visible-md hidden-sm visible-xs">
 					<div id="menu-search-mainbar" class="nav navbar-form navbar-right">
 						<form class="form-inline" role="search">
 							<form action="{% url 'search' %}" method="GET">
@@ -130,7 +130,7 @@
 							</form>
 						</form>
 					</div>
-				</span>
+				</div>
 			</div>
 		</div>
 	</nav>

@@ -13,11 +13,11 @@ class RemoveWwwMiddleware():
 		Largely from https://gist.github.com/dryan/290771
 	"""
 	def process_request(self, request):
-		try:
-			if request.META['HTTP_HOST'].lower().find('www.') == 0:
-				from django.http import HttpResponsePermanentRedirect
-				return HttpResponsePermanentRedirect(request.build_absolute_uri().replace('//www.', '//'))
-		except:
-			pass
+		#try:
+		if request.META['HTTP_HOST'].lower().find('www.') == 0:
+			from django.http import HttpResponsePermanentRedirect
+			return HttpResponsePermanentRedirect(request.build_absolute_uri().replace('//www.', '//'))
+		#except:
+		#	pass
 
 

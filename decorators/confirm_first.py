@@ -20,7 +20,7 @@ def confirm_first(message, subject = '', submit_text = 'continue', submit_class 
 	confirm_field_name = CONFIRM_FIELD_NAME, cancel_url_name = None):
 	def actual_decorator(view_func):
 		def wrapped_func(request, *args, **kwargs):
-			''' check if this is a POST request and whether it's already confirmed '''
+			""" check if this is a POST request and whether it's already confirmed """
 			if request.method == 'POST':
 				if confirm_field_name not in request.POST:
 					cancel_url = '/'

@@ -6,7 +6,7 @@ try:
 except ImportError:
 	from urlparse import urlparse
 from re import sub, IGNORECASE
-import settings
+from django.conf import settings
 
 
 DEFAULT_NOSCR_ALLOWED_TAGS = 'strong:title b i em:title p:title h1:title h2:title h3:title h4:title h5:title ' + \

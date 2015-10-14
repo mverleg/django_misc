@@ -41,14 +41,14 @@ $(document).ready(function() {
 			sideBySide: true,
 			showToday: true,
 			minuteStepping: 5,
-			useSeconds: false,
+			useSeconds: false
 		});
 	});
 	$('.insert-dateinput').each(function(k) {
 		$(this).datetimepicker({
 			format: document.settings.DATE_INPUT_FORMAT,
 			pickTime: false,
-			showToday: true,
+			showToday: true
 		});
 	});
 	$('.insert-timeinput').each(function(k) {
@@ -56,7 +56,7 @@ $(document).ready(function() {
 			format: document.settings.TIME_INPUT_FORMAT,
 			pickDate: false,
 			minuteStepping: 5,
-			useSeconds: false,
+			useSeconds: false
 		});
 	});
 });

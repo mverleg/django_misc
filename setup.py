@@ -4,27 +4,27 @@
 	Adapted from https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
 """
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
-with open('README.rst', 'r') as fh:
-	readme = fh.read()
-
+with open('requires.pip', 'r') as fh:
+	requires = [package.strip() for package in fh.read().splitlines() if package.strip()]
 
 setup(
-	name='django-display-exceptions',
-	description='This app can (slightly) encourage modularity and readability, as well as decrease code repetition and length, by using Exceptions to handle exceptional (non-standard) situations.',
-	long_description=readme,
-	url='https://github.com/mverleg/django_display_exception',
+	name='misc',
+	description='A lot of random utilities',
+	long_description='',
+	url='n',
 	author='Mark V',
 	maintainer='(the author)',
 	author_email='mdilligaf@gmail.com',
-	license='Revised BSD License (LICENSE.txt)',
-	keywords=['django', 'coding-style',],
+	license='',
+	keywords=['django',],
 	version='1.0',
-	packages=['display_exceptions'],
+	packages=find_packages(),
 	include_package_data=True,
 	zip_safe=False,
+	install_requires=requires,
 	classifiers=[
 		'Development Status :: 5 - Production/Stable',
 		'Intended Audience :: Developers',
@@ -41,9 +41,6 @@ setup(
 		'Programming Language :: Python :: 3.5',
 		'Programming Language :: Python :: Implementation :: PyPy',
 		'Topic :: Software Development :: Libraries :: Python Modules',
-	],
-	install_requires=[
-		'django',
-		'django-model-utils',
-	],
+		'Private :: Do Not Upload By Accident',
+	], requires=['django']
 )

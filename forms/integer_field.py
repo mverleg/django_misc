@@ -47,7 +47,7 @@ class BigPositiveIntegerField(BigIntegerField):
 class StrictlyPositiveIntegerField(PositiveIntegerField):
 	@cached_property
 	def validators(self):
-		return super(StrictlyPositiveIntegerFormField, self).validators + [MinValueValidator(1)]
+		return super(StrictlyPositiveIntegerField, self).validators + [MinValueValidator(1)]
 
 	def formfield(self, **kwargs):
 		defaults = {
