@@ -15,7 +15,7 @@ setup(
 	name='misc',
 	description='A lot of random utilities',
 	long_description='',
-	url='n',
+	url='',
 	author='Mark V',
 	maintainer='(the author)',
 	author_email='mdilligaf@gmail.com',

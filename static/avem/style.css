@@ -81,11 +81,11 @@ body
 	padding: 0 .7em 0 0;
 }
 
-#footer > ul li:not(:last-child)
+/*#footer > ul li:not(:last-child)
 {
 	border: solid #E7E7E7;
 	border-right-width: 1px;
-}
+}*/
 
 #footer_area
 {
