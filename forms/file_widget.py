@@ -6,13 +6,13 @@ from django.template.loader import render_to_string
 from django.forms import FileInput as DjangoFileInput
 
 
-class FileInput(DjangoFileInput):
+class BootstrapFileInput(DjangoFileInput):
 	"""
 		Widget for showing a pretty Bootstrap3 file form.
 	"""
 
 	def __init__(self, attrs = None, clearable = None):
-		super(FileInput, self).__init__(attrs = attrs)
+		super(BootstrapFileInput, self).__init__(attrs = attrs)
 		self.clearable = clearable
 		if clearable is None:
 			self.clearable = not self.attrs.get('required', False)

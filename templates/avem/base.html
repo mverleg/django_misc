@@ -48,9 +48,9 @@
 				<div class="collapse navbar-collapse" id="menu_account">
 					<ul class="nav navbar-nav">
 						{% if request.user.is_authenticated %}
-							{% include 'account_menu_items.html' %}
+							{% include 'avem/menu_items_account.html' %}
 						{% else %}
-							{% include 'login_menu_items.html' %}
+							{% include 'avem/menu_items_login.html' %}
 						{% endif %}
 					</ul>
 				</div>
@@ -65,9 +65,9 @@
 						</a>
 						<ul class="dropdown-menu {% if not request.user.is_authenticated %}large-dropdown{% endif %}">
 							{% if request.user.is_authenticated %}
-								{% include 'account_menu_items.html' %}
+								{% include 'avem/menu_items_account.html' %}
 							{% else %}
-								{% include 'login_menu_items.html' %}
+								{% include 'avem/menu_items_login.html' %}
 							{% endif %}
 						</ul>
 					</li>
