@@ -25,7 +25,7 @@
 
 		{% block framework_css %}
 			<link rel='stylesheet' href='{% static 'meyer_reset.css' %}' />
-			<link rel='stylesheet' href='{% static 'misc/bootstrap-3.3.5/js/bootstrap.min.css' %}' />
+			<link rel='stylesheet' href='{% static 'misc/bootstrap-3.3.5/css/bootstrap.min.css' %}' />
 		{% endblock framework_css %}
 
 		{% block widget_css %}
@@ -112,7 +112,7 @@
 		{% block framework_js %}
 			<script src='{% static 'misc/jquery-2.1.4.min.js' %}'></script> {# minor version difference with CDN #}
 			<script src='{% static 'misc/bootstrap-3.3.5/js/bootstrap.min.js' %}'></script>
-			<script src="{% static 'momentjs/min/moment.min.js' %}"></script>
+			{# <script src="{% static 'momentjs/min/moment.min.js' %}"></script> #}
 		{% endblock framework_js %}
 
 		{% block widget_js %}
