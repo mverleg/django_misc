@@ -8,7 +8,8 @@ from setuptools import setup, find_packages
 
 
 with open('requires.pip', 'r') as fh:
-	requires = [package.strip() for package in fh.read().splitlines() if package.strip()]
+	requires = [package.split('# ')[0].strip() for package in fh.read().splitlines()
+	    if package.strip() and not package.startswith('#')]
 
 setup(
 	name='misc',
