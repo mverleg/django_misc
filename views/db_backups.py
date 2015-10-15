@@ -4,7 +4,7 @@ from io import StringIO
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.management import call_command
 from django.http import FileResponse, HttpResponseForbidden
-from functions.permission import lazy_create_permission
+from misc.functions.permission import lazy_create_permission
 from display_exceptions import NotYetImplemented
 
 
