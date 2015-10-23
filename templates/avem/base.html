@@ -15,11 +15,11 @@
 {% endblock extra_meta %}
 
 {% block site_css %}
-	<link rel='stylesheet' href='{% static 'style.css' %}' />
+	<link rel="stylesheet" href="{% static 'style.css' %}?c={% static_mtime_b64 'style.css' %}" />
 {% endblock site_css %}
 
 {% block site_js %}
-	<script src="{% static 'script.js' %}"></script>
+	<script src="{% static 'script.js' %}?c={% static_mtime_b64 'script.js' %}"></script>
 {% endblock site_js %}
 
 {% block page_attr %}{{ block.super }} class='container'{% endblock page_attr %}
