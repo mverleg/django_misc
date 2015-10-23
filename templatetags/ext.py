@@ -1,4 +1,4 @@
-from base64 import b64encode
+
 from math import ceil
 from django.contrib.staticfiles import finders
 from django.core.serializers.json import DjangoJSONEncoder
@@ -7,8 +7,7 @@ from django.utils.html import escape, mark_safe
 from django import template
 from django.utils.timesince import timesince
 from os.path import getmtime
-from struct import pack
-from functions.hashing import float_b64
+from misc.functions.hashing import float_b64
 from misc.functions.list_sample import list_sample
 from misc.functions.obfuscate import obfuscate_letter
 from misc.functions.sanitize import sanitize_html
