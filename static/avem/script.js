@@ -7,7 +7,10 @@ $(document).ready(function()
 	$('.obfuscated').each(function(k) {
 		var cypher = $(this).find('span').get(0).innerHTML;
 		var clear = deobfuscate(cypher);
-		$(this).replaceWith(clear);
+		if ($(this).is('.obfuscated_email')) {
+			clear = '<a href="mailto:' + clear + '">' + clear + '</a>';
+		}
+		$(this).replaceWith('<span class="deobfuscated" title="This value has been un-hidden using javascript.">' + clear + '</span>');
 	});
 
 	/*

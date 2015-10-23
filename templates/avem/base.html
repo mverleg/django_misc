@@ -37,7 +37,7 @@
 				</button>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_account" aria-expanded="false">
 					<span class="sr-only">Toggle account options</span>
-					<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}account{% else %}login{% endif %} <b class="caret"></b>
+					<i class="glyphicon glyphicon-user"></i> {% if request.user.is_authenticated %}{% firstof request.user.get_short_name 'account' %}{% else %}login{% endif %} <b class="caret"></b>
 				</button>
 				{% block menu_home %}
 					<a class="navbar-brand" href="{% url 'home' %}"><i class="glyphicon glyphicon-home"></i> {% block brand_name %}markv{% endblock brand_name %}</a>

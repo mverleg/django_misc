@@ -29,7 +29,7 @@ def if_url(context, url_name, output = 'active'):
 
 
 @register.filter
-def obfuscate(clear):
+def obfuscate(clear, email = False):
 	"""
 		obfuscate text (probably email) with javascript
 		(40 chosen to exclude &)
@@ -37,8 +37,14 @@ def obfuscate(clear):
 	''' the obfuscation '''
 	cypher = ''.join(obfuscate_letter(letter, pos) for pos, letter in enumerate(escape(clear)))
 	''' wrap it to mark for deobfuscating '''
-	span = '<span class=\'obfuscated\' title=\'this text was obfuscated to hide it from spammers; please enable javascript to see it\'>[enable JS]<span style="display: none;">%s</span></span>' % cypher
+	span = ('<span class="obfuscated {1:s}" title="This text was obfuscated to hide it from spammers; please enable javascript to see it.">' +
+	    '[enable JS]<span style="display: none;">{0:s}</span></span>').format(cypher, 'obfuscated_email' if email else '')
 	return mark_safe(span)
+
+
+@register.filter
+def obfuscate_email(clear):
+	return obfuscate(clear, email = True)
 
 
 @register.filter
