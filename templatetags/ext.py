@@ -1,10 +1,14 @@
-
+from base64 import b64encode
 from math import ceil
+from django.contrib.staticfiles import finders
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
 from django import template
 from django.utils.timesince import timesince
+from os.path import getmtime
+from struct import pack
+from functions.hashing import float_b64
 from misc.functions.list_sample import list_sample
 from misc.functions.obfuscate import obfuscate_letter
 from misc.functions.sanitize import sanitize_html
@@ -175,5 +179,19 @@ def since_short(text):
 		so results are shorter in English but should still work in other language.
 	"""
 	return timesince(str(text)).split(',')[0].strip().replace('minutes', 'min').replace('hours', 'hr')
+
+
+@register.simple_tag(takes_context = False)
+def static_mtime_b64(*staticfile_paths):
+	"""
+		Return the b64 encoded most recent changed date among staticfile_paths.
+	"""
+	latest = None
+	for path in staticfile_paths:
+		if not latest or latest < getmtime(finders.find(path)):
+			latest = getmtime(finders.find(path))
+	if latest:
+		return float_b64(latest)
+	return None
 
 

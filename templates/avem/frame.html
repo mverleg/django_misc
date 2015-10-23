@@ -37,7 +37,7 @@
 		{% block theme_css %}
 		{% endblock theme_css %}
 
-		<link rel='stylesheet' href='{% static 'avem/style.css' %}' />
+		<link rel='stylesheet' href='{% static 'avem/style.css' %}?c={% static_mtime_b64 'avem/style.css' %}' />
 		{% block site_css %}
 		{% endblock site_css %}
 
@@ -130,7 +130,7 @@
 		{% block theme_js %}
 		{% endblock theme_js %}
 
-		<script src="{% static 'avem/script.js' %}"></script>
+		<script src="{% static 'avem/script.js' %}?c={% static_mtime_b64 'avem/script.js' %}"></script>
 		{% block site_js %}
 		{% endblock site_js %}
 
