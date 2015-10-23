@@ -6,7 +6,7 @@
 			Browse
 		</label>
 	</div>
-	<input id="crispy_file_input_{{ rand_id }}_name" type="text" class="form-control" placeholder="Select a file" style="cursor: pointer; margin-left: -1px;" readonly>
+	<input id="crispy_file_input_{{ rand_id }}_name" type="text" class="form-control" placeholder="Select a file" style="cursor: pointer; margin-left: -1px;" readonly />
 	{% if clearable %}
 		<div class="input-group-btn" onclick="crispy_file_input_clear();">
 			<span class="btn btn-default" style="margin-left: -2px;">
@@ -17,7 +17,7 @@
 </div>
 
 <div style="height: 0; overflow: hidden;">
-	<input type="file" name="{{ filewidget.name|slugify }}" id="crispy_file_input_{{ rand_id }}" class="{{ filewidget.class }}" />
+	<input type="file" name="{{ filewidget.name|slugify }}" id="crispy_file_input_{{ rand_id }}" class="{{ filewidget.class }}" {% if multiple %}multiple{% endif %} />
 </div>
 
 <script>
@@ -43,7 +43,12 @@
 	};
 	crispy_file_input_input.onchange = function(event)
 	{
-		crispy_file_input_name.value = this.value.split('\\') + ' (' + crispy_file_input_fsize_unit(this.files[0].size) + ')';
+		var total_size = 0;
+		for (k = 0; k < this.files.length; k += 1)
+		{
+			total_size += this.files[k].size;
+		}
+		crispy_file_input_name.value = ((this.files.length > 1) ? (this.files.length + ' files') : this.value.split('\\')) + ' (' + crispy_file_input_fsize_unit(total_size) + ')';
 		event.preventDefault();
 	};
 	{% if clearable %}

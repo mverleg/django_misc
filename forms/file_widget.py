@@ -11,9 +11,10 @@ class BootstrapFileInput(DjangoFileInput):
 		Widget for showing a pretty Bootstrap3 file form.
 	"""
 
-	def __init__(self, attrs = None, clearable = None):
+	def __init__(self, attrs = None, clearable = None, multiple = False):
 		super(BootstrapFileInput, self).__init__(attrs = attrs)
 		self.clearable = clearable
+		self.multiple = multiple
 		if clearable is None:
 			self.clearable = not self.attrs.get('required', False)
 		self._warned_initial_value = False
@@ -26,6 +27,7 @@ class BootstrapFileInput(DjangoFileInput):
 			'rand_id': ''.join(choice(ascii_letters) for k in range(12)),
 			'filewidget': final_attrs,
 			'clearable': self.clearable,
+			'multiple': self.multiple,
 		})
 
 
