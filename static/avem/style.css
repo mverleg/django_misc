@@ -1,4 +1,16 @@
 
+/*
+	Switch down/up arrow in the menu bar
+*/
+.navbar-toggle.collapsed > .collapse-button-icon-opened
+{
+	display: none;
+}
+
+.navbar-toggle:not(.collapsed) > .collapse-button-icon-collapsed
+{
+	display: none;
+}
 
 /*
 	clear float

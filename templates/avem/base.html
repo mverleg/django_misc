@@ -32,7 +32,8 @@
 			<div class="navbar-header">
 				<button type="button" id="menubar-toggle-collapse" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_general" aria-expanded="false">
 					<span class="sr-only">Toggle menu</span>
-					<i class="glyphicon glyphicon-chevron-down"></i>
+					<i class="glyphicon glyphicon-chevron-down collapse-button-icon-collapsed"></i>
+					<i class="glyphicon glyphicon-chevron-up collapse-button-icon-opened"></i>
 				</button>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_account" aria-expanded="false">
 					<span class="sr-only">Toggle account options</span>
@@ -114,20 +115,18 @@
 				<!-- Search for very large (in bar) or very small (in collapse) sites -->
 				<div class="visible-lg visible-md hidden-sm visible-xs">
 					<div id="menu-search-mainbar" class="nav navbar-form navbar-right">
-						<form class="form-inline" role="search">
-							<form action="{% url 'search' %}" method="GET">
-								<div class="form-group">
-									<div class="input-group">
-										<input id="search_field" type="text" name="q" class="form-control" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
-										<div class="input-group-btn" onclick="">
-											<label class="btn btn-default" for="search_submit_bar">
-												<i class="glyphicon glyphicon-search"></i>
-											</label>
-										</div>
+						<form class="form-inline" role="search" action="{% url 'search' %}" method="GET">
+							<div class="form-group">
+								<div class="input-group">
+									<input id="search_field" type="text" name="q" class="form-control" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
+									<div class="input-group-btn" onclick="">
+										<label class="btn btn-default" for="search_submit_bar">
+											<i class="glyphicon glyphicon-search"></i>
+										</label>
 									</div>
 								</div>
-								<input type="submit" style="display: none;" id="search_submit_bar" />
-							</form>
+							</div>
+							<input type="submit" style="display: none;" id="search_submit_bar" />
 						</form>
 					</div>
 				</div>
