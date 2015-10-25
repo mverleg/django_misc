@@ -102,6 +102,11 @@
 							{# <li><a href="{% url 'contact' %}">contact</a></li> #}
 							{# <li><a href="{% url 'credits' %}">credits</a></li> #}
 						{% endblock footer_about %}
+						{% block footer_notify %}
+							{% if DEBUG %}
+								<li title="The website is running in debug mode. Apologies if you encounter any problems!"><strong>debug mode</strong></li>
+							{% endif %}
+						{% endblock footer_notify %}
 					{% endblock page_footer %}
 				</ul>
 			</div>

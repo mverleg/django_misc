@@ -11,6 +11,7 @@ def context_settings(request):
 	if hasattr(settings, 'USE_CDN'):
 		warn('USE_CDN setting no longer supported')
 	return {
+		'DEBUG':                settings.DEBUG,
 		'SITE_URL':             settings.SITE_URL.rstrip('/'),
 		'BASE_TEMPLATE':        settings.BASE_TEMPLATE,
 		'BASE_EMAIL_TEMPLATE':  settings.BASE_EMAIL_TEMPLATE,
