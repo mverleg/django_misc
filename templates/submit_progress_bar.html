@@ -1,0 +1,117 @@
+
+<div id="crispy_submit_progress_{{ rand_id }}" class="progress progress-striped active crispy_submit_progress_bar" aria-hidden="true" style="display: none;">
+	<div class="progress-bar" style="width: 100%;"></div>
+</div>
+
+<script>
+	/* todo disable all form fields */
+	/* todo the browse button doesn't work correctly anymore beacuse js isn't re-initialized */
+	/* todo the loading bar is in the wrong place */
+	/* todo progress events don't seem to actually fire */
+	(function() {
+		function find_tag_in_family(start, tagname)
+		{
+			// check all parents to see if any is a form
+			var node = start;
+			while (node.parentNode)
+			{
+				if (node.parentNode.nodeName.toLowerCase() == tagname)
+				{
+					return node.parentNode;
+				}
+				node = node.parentNode;
+			}
+			// check all sibling subtrees for the tag, stopping at the fist match
+			var forms = start.parentNode.getElementsByTagName(tagname);
+			if (forms.length >= 1)
+			{
+				return forms[0];
+			}
+			return undefined;
+		}
+		function replace_node_by_html(old, html)
+		{
+			// quite a pain to replace one element by several in one go
+			var frag = document.createDocumentFragment();
+			var div = document.createElement('div');
+			div.innerHTML = html;
+			while (div.childNodes.length)
+			{
+				frag.appendChild(div.childNodes[0]);
+			}
+			// load the node
+			var container = old.parentNode;
+			old.parentNode.replaceChild(frag, old);  // return value incorrect
+			// re-insert all the script tags to trigger them
+			// EDIT: doesn't work
+{#			var scrs = container.getElementsByTagName('script')#}
+{#			for (k = 0; k < scrs.length; k += 1)#}
+{#			{#}
+{#				scrs[k].parentNode.replaceChild(scrs[k], scrs[k])#}
+{#			}#}
+			return container.getElementsByTagName('form')[0];
+		}
+		function process_form(form, bar, event)
+		{
+			// hide submit button and show progress bar
+			form.querySelector('[type=submit]').style.display = 'none';
+			bar.style.display = 'block';
+			var progress = bar.getElementsByClassName('progress-bar')[0];
+			progress.style.width = '5%';
+			// make an xhr object
+			var request = new XMLHttpRequest();
+			// track progress
+			request.addEventListener('progress', function (progress, event)
+			{
+				console.log('progress:', event.loaded, 100 * event.loaded / event.total);
+				progress.style.width = Math.max(100 * event.loaded / event.total, 5) + '%';
+
+			}.bind(null, progress), false);
+			// check the result
+			request.addEventListener('load', function (form, request, event)
+			{
+				var resp = JSON.parse(request.response);
+				if (resp.success)
+				{
+					// redirect to success url
+					window.location.href = resp.redirect;
+				}
+				else
+				{
+					var form = replace_node_by_html(form, resp.form)
+					var nwprogress = form.parentNode.getElementsByClassName('crispy_submit_progress_bar');
+					if (nwprogress.length >= 1)
+					{
+						crispy_submit_progress_readygo(nwprogress[0]);
+					}
+					else
+					{
+						console.log('new form did not seem to contain a progress bar');
+					}
+				}
+
+			}.bind(null, form, request), false);
+			// setup request method and url
+			request.open(form.method || 'POST', form.action || '.');
+			// send the request
+			request.send(new FormData(form));
+			// don't do normal submission
+			event.preventDefault();
+			return false;
+		}
+		function crispy_submit_progress_readygo(bar)
+		{
+			var form = find_tag_in_family(bar, 'form');
+			if ( ! form)
+			{
+				console.log('no form found to attach #crispy_submit_progress_{{ rand_id }} to');
+				return;
+			}
+			form.addEventListener('submit', process_form.bind(null, form, bar));
+		}
+		var bar = document.getElementById('crispy_submit_progress_{{ rand_id }}');
+		document.addEventListener('DOMContentLoaded', crispy_submit_progress_readygo.bind(null, bar));
+	})();
+</script>
+
+

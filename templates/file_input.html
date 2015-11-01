@@ -20,7 +20,7 @@
 	<input type="file" name="{{ filewidget.name|slugify }}" id="crispy_file_input_{{ rand_id }}" class="{{ filewidget.class }}" {% if multiple %}multiple{% endif %} />
 </div>
 
-<script>
+<script type="text/javascript">
 	function crispy_file_input_fsize_unit(sz)
 	{
 		/* http://stackoverflow.com/questions/10420352/converting-file-size-in-bytes-to-human-readable */
@@ -34,30 +34,33 @@
 		sz = sz.toFixed(sz > 20 ? 0: 1);
 		return sz + ' ' + unit[i];
 	}
-	var crispy_file_input_input = document.getElementById('crispy_file_input_{{ rand_id }}');
-	var crispy_file_input_name = document.getElementById('crispy_file_input_{{ rand_id }}_name');
-	crispy_file_input_name.onclick = function()
-	{
-		this.blur();
-		crispy_file_input_input.click();
-	};
-	crispy_file_input_input.onchange = function(event)
-	{
-		var total_size = 0;
-		for (k = 0; k < this.files.length; k += 1)
+	(function() {
+		/* all the crispy_file_ prefixes are made redundant now by proper scope isolation */
+		var crispy_file_input_input = document.getElementById('crispy_file_input_{{ rand_id }}');
+		var crispy_file_input_name = document.getElementById('crispy_file_input_{{ rand_id }}_name');
+		crispy_file_input_name.onclick = function()
 		{
-			total_size += this.files[k].size;
-		}
-		crispy_file_input_name.value = ((this.files.length > 1) ? (this.files.length + ' files') : this.value.split('\\')) + ' (' + crispy_file_input_fsize_unit(total_size) + ')';
-		event.preventDefault();
-	};
-	{% if clearable %}
-		function crispy_file_input_clear()
+			this.blur();
+			crispy_file_input_input.click();
+		};
+		crispy_file_input_input.onchange = function(event)
 		{
-			crispy_file_input_input.value = '';
-			crispy_file_input_name.value = '';
-		}
-	{% endif %}
+			var total_size = 0;
+			for (k = 0; k < this.files.length; k += 1)
+			{
+				total_size += this.files[k].size;
+			}
+			crispy_file_input_name.value = ((this.files.length > 1) ? (this.files.length + ' files') : this.value.split('\\')) + ' (' + crispy_file_input_fsize_unit(total_size) + ')';
+			event.preventDefault();
+		};
+		{% if clearable %}
+			function crispy_file_input_clear()
+			{
+				crispy_file_input_input.value = '';
+				crispy_file_input_name.value = '';
+			}
+		{% endif %}
+	})();
 </script>
 
 
