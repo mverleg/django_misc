@@ -1,6 +1,7 @@
 
 from warnings import warn
 from django.conf import settings
+from django.utils.safestring import mark_safe
 from misc.functions.obfuscate import ENCCHARS
 
 
@@ -15,6 +16,8 @@ def context_settings(request):
 		'SITE_URL':             settings.SITE_URL.rstrip('/'),
 		'BASE_TEMPLATE':        settings.BASE_TEMPLATE,
 		'BASE_EMAIL_TEMPLATE':  settings.BASE_EMAIL_TEMPLATE,
+		'TITLE_BASE':           mark_safe(getattr(settings, 'TITLE_BASE', 'TITLE_BASE')),
+		'TITLE_SEPARATOR':      mark_safe(getattr(settings, 'TITLE_SEPARATOR', '&laquo;')),
 		#'AUTH_REQUIRE_SECURE':  settings.AUTH_REQUIRE_SECURE,
 	}
 

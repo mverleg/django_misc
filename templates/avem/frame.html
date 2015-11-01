@@ -80,8 +80,8 @@
 			</div>
 		</div>
 
-		<div id='footer_area' {% block footer_area_attr %}{% endblock footer_area_attr %}>
-			<div id='footer' {% block footer_attr %}{% endblock footer_attr %}>
+		<section id='footer_area' {% block footer_area_attr %}{% endblock footer_area_attr %}>
+			<footer id='footer' {% block footer_attr %}{% endblock footer_attr %}>
 				<div id='name' {% block name_attr %}{% endblock name_attr %}>
 					{% block page_name %}{{ TITLE_BASE }}{% endblock page_name %}
 				</div>
@@ -108,8 +108,8 @@
 						{% endblock footer_notify %}
 					{% endblock page_footer %}
 				</ul>
-			</div>
-		</div>
+			</footer>
+		</section>
 
 		<!-- javascript here for speed considerations -->
 
