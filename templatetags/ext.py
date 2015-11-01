@@ -177,7 +177,7 @@ def since_short(text):
 		Shorter version of |timesince. Makes sure there is only one unit. Also shortens 'minutes' and 'hours',
 		so results are shorter in English but should still work in other language.
 	"""
-	return timesince(str(text)).split(',')[0].strip().replace('minutes', 'min').replace('hours', 'hr')
+	return timesince(text).split(',')[0].strip().replace('minute', 'min').replace('hour', 'hr')
 
 
 @register.simple_tag(takes_context = False)

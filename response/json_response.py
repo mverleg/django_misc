@@ -25,7 +25,7 @@ class JSONResponse(HttpResponse):
 		if mime is not None:
 			content_type = mime
 		content = dumps(data, indent = indent, **json_kwargs)
-		super(JSONResponse, self).__init__(content = content, content_type = content_type, status_code = status_code)
+		super(JSONResponse, self).__init__(content = content, content_type = content_type, status = status_code)
 
 
 def json_io(func):
