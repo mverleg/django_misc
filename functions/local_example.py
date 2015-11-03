@@ -66,12 +66,12 @@ def generate_local(_file, project='PROJECT', create=False):
 					chmod(pth, 0o600)
 				except:
 					stderr.write('could not set permissions for local.py at "{0:s}"\n'.format(pth))
-			mpth = join('data', 'media', project)
+			mpth = join('/', 'data', 'media', project)
 			try:
 				makedirs(mpth, mode=0o770, exist_ok=True)
 			except Exception:
 				stderr.write('could not create media directory "{0:s}"\n'.format(mpth))
-			spth = join('data', 'static', project)
+			spth = join('/', 'data', 'static', project)
 			try:
 				makedirs(spth, mode=0o740, exist_ok=True)
 			except Exception:
