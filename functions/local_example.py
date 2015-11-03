@@ -2,7 +2,7 @@
 import string
 from os import chmod, makedirs
 from random import choice
-from os.path import join, basename, exists
+from os.path import join, exists, dirname, abspath
 from sys import stderr
 
 
@@ -54,7 +54,7 @@ def generate_local(_file, project='PROJECT', create=False):
 	key = ''.join(choice(chars) for k in range(32))
 	content = template.format(project, key)
 	if create:
-		pth = join(basename(_file), 'local.py')
+		pth = join(dirname(abspath(_file)), 'local.py')
 		if not exists(pth):
 			try:
 				with open(pth, 'w+') as fh:
