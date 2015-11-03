@@ -22,8 +22,8 @@ ALLOWED_HOSTS = ['.{0:s}'.format(SITE_URL), 'localhost', '.localhost.narkv.nl']
 
 SECRET_KEY = '{1:s}'
 
-DATABASES = {  #todo: disable one of the databases
-	'default': {
+DATABASES = {{  #todo: disable one of the databases
+	'default': {{
 		'ENGINE': 'django.db.backends.mysql',
 		'NAME': '{0:s}',
 		'USER': '{0:s}',
@@ -31,14 +31,14 @@ DATABASES = {  #todo: disable one of the databases
 		'HOST': '127.0.0.1',
 		'PORT': '3306',
 		'CONN_MAX_AGE': 120,
-	}
-}
-DATABASES = {
-	'default': {
+	}}
+}}
+DATABASES = {{
+	'default': {{
 		'ENGINE': 'django.db.backends.sqlite3',
 		'NAME': join('data', 'sqlite', '{0:s}', 'db.sqlite3'),  #todo!!
-	}
-}
+	}}
+}}
 
 MEDIA_ROOT = join('data', 'media', '{0:s}')
 STATIC_ROOT = join('data', 'static', '{0:s}')
