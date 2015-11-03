@@ -69,13 +69,15 @@ def generate_local(_file, project='PROJECT', create=False):
 			mpth = join('/', 'data', 'media', project)
 			try:
 				makedirs(mpth, mode=0o770, exist_ok=True)
-			except Exception:
-				stderr.write('could not create media directory "{0:s}"\n'.format(mpth))
+			except Exception as err:
+				stderr.write('could not create media directory "{0:s}": {1:s}\n'.format(mpth, str(err)))
 			spth = join('/', 'data', 'static', project)
 			try:
 				makedirs(spth, mode=0o740, exist_ok=True)
-			except Exception:
-				stderr.write('could not create static directory "{0:s}"\n'.format(spth))
+			except Exception as err:
+				stderr.write('could not create static directory "{0:s}": {1:s}\n'.format(spth, str(err)))
+		else:
+			stderr.write('local.py exists after all at "{0:s}"'.format(pth))
 	else:
 		print(content)
 	print('\n\n\n')
