@@ -15,7 +15,10 @@ from django.http import HttpResponse
 
 def json_input(func):
 	def json_func(request, *args, **kwargs):
-		data = loads(request.body)
+		try:
+			data = loads(request.body)
+		except ValueError:
+			return HttpResponse('invalid json', status=400)
 		return func(request, data, *args, **kwargs)
 	return json_func
 
