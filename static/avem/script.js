@@ -52,8 +52,8 @@ $(document).ready(function()
 	 */
 	$(window).bind('keydown', function(event)
 	{
-	    if (event.ctrlKey || event.metaKey) {
-	        switch (String.fromCharCode(event.which).toLowerCase())
+		if (event.ctrlKey || event.metaKey) {
+			switch (String.fromCharCode(event.which).toLowerCase())
 			{
 				case 'h':
 					event.preventDefault();
@@ -77,8 +77,28 @@ $(document).ready(function()
 					}
 					setTimeout(focus_and_select_input.bind(null, input), 0);
 					break;
-	        }
-	    }
+			}
+		}
+	});
+
+	/*
+		Add square_image_portrait to square_image_*, see CSS for notes.
+
+		The square_image_* wrappers should contain a single image.
+	 */
+	$('.square_image_64, .square_image_128, .square_image_256').each(function (k, wrapper) {
+		var wrapper = $(wrapper);
+		var imgs = wrapper.find('img');
+		if (imgs.length == 1)
+		{
+			var img = $(imgs[0]);
+			img.ready(function (img, wrapper) {
+				if (img.naturalWidth < img.naturalHeight)
+				{
+					wrapper.addClass('square_image_portrait');
+				}
+			}.bind(null, img[0], wrapper))
+		}
 	});
 });
 

@@ -1,5 +1,86 @@
 
 /*
+	Fixed-size, square images with their largest dimension cropped to fit in a box.
+
+	Use one of square_image_64, square_image_128 or square_image_256
+
+	With pure CSS it works perfectly for landscape images and imperfect-but-acceptable for portrait.
+	Portrait images need the square_image_portrait class, which is added by javascript.
+*/
+.square_image_64, .square_image_128, .square_image_256
+{
+	overflow: hidden;
+	position: relative;
+	margin-right: 0.5em;
+}
+
+.square_image_64 img, .square_image_128 img, .square_image_256 img
+{
+	width: auto;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.square_image_64
+{
+	width: 64px;
+	height: 64px;
+}
+
+.square_image_128
+{
+	width: 128px;
+	height: 128px;
+}
+
+.square_image_256
+{
+	width: 256px;
+	height: 256px;
+}
+
+.square_image_64 img
+{
+	height: 64px;
+}
+
+.square_image_128 img
+{
+	height: 128px;
+}
+
+.square_image_256 img
+{
+	height: 256px;
+}
+
+.square_image_portrait img
+{
+	left: auto;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.square_image_portrait.square_image_64 img
+{
+	height: auto;
+	width: 64px;
+}
+
+.square_image_portrait.square_image_128 img
+{
+	height: auto;
+	width: 128px;
+}
+
+.square_image_portrait.square_image_256 img
+{
+	height: auto;
+	width: 256px;
+}
+
+/*
 	Switch down/up arrow in the menu bar
 */
 .navbar-toggle.collapsed > .collapse-button-icon-opened
