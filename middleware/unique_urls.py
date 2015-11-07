@@ -43,6 +43,7 @@ class WwwSlashMiddleware():
 		Combination of RemoveWwwMiddleware and AppendSlashMiddleware
 	"""
 	def process_request(self, request):
+		print('Q', request.get_full_path())
 		original = request.build_absolute_uri()
 		nw = original.replace('//www.', '//')
 		if nw.endswith('/'):
@@ -53,6 +54,24 @@ class WwwSlashMiddleware():
 				""" Version without / at the end doesn't exist - do not redirect. """
 			else:
 				nw = nw[:-1]
+		else:
+			print('A', request.get_full_path())
+			try:
+				resolve(request.get_full_path())
+			except Resolver404:
+				print('B', request.get_full_path())
+				try:
+					# use full path here instead of absolute uri; resolve doesn't handle domain names
+					resolve(request.get_full_path() + '/')
+				except Resolver404:
+					print('C', request.get_full_path())
+					""" Current version and version witg / at the end both don't exist - do not redirect. """
+				else:
+					print('D', request.get_full_path())
+					nw = nw + '/'
+			else:
+				""" Version without slash exists, don't add it back! """
+				print('E', request.get_full_path())
 		if not original == nw:
 			from django.http import HttpResponsePermanentRedirect
 			return HttpResponsePermanentRedirect(nw)
