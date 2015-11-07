@@ -118,7 +118,7 @@
 						<form class="form-inline" role="search" action="{% url 'search' %}" method="GET">
 							<div class="form-group">
 								<div class="input-group">
-									<input id="search_field" type="text" name="q" class="form-control" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
+									<input id="search_field" type="text" name="q" class="form-control" value="{{ query }}" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
 									<div class="input-group-btn" onclick="">
 										<label class="btn btn-default" for="search_submit_bar">
 											<i class="glyphicon glyphicon-search"></i>
