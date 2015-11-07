@@ -187,7 +187,8 @@ def static_mtime_b64(*staticfile_paths):
 	"""
 	latest = None
 	for path in staticfile_paths:
-		if not latest or latest < getmtime(finders.find(path)):
+		found = finders.find(path)
+		if found and (not latest or latest < getmtime(finders.find(path))):
 			latest = getmtime(finders.find(path))
 	if latest:
 		return float_b64(latest)
