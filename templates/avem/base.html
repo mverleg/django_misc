@@ -76,16 +76,16 @@
 			</div>
 
 			<!-- Search for medium devices as a button with dropdown formfield (the other one is inside collapse) -->
-			<div class="hidden-lg hidden-md visible-sm hidden-xs"> {# todo: also for md? #}
+			<div class="hidden-lg hidden-md visible-sm hidden-xs">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" id="menu-search-dropdown-button" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<i class="glyphicon glyphicon-search"></i> search
 							<span class="caret"></span>
 						</a>
-						<ul id="menu-search-dropdown" class="dropdown-menu large-dropdown"> {# todo where is the actual form? #}
+						<ul id="menu-search-dropdown" class="dropdown-menu large-dropdown">
 							<li class="form-group">
-								<form action="{% url 'search' %}" method="GET">
+								<form action="{% url 'search' %}" method="GET" title="cltr+H">
 									<div class="input-group">
 										<input id="search_field" type="text" name="q" class="form-control" placeholder="Search">
 										<div class="input-group-btn" >
@@ -115,7 +115,7 @@
 				<!-- Search for very large (in bar) or very small (in collapse) sites -->
 				<div class="visible-lg visible-md hidden-sm visible-xs">
 					<div id="menu-search-mainbar" class="nav navbar-form navbar-right">
-						<form class="form-inline" role="search" action="{% url 'search' %}" method="GET">
+						<form class="form-inline" role="search" action="{% url 'search' %}" method="GET" title="cltr+H">
 							<div class="form-group">
 								<div class="input-group">
 									<input id="search_field" type="text" name="q" class="form-control" value="{{ query }}" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
