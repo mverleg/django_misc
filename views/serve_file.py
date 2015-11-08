@@ -15,7 +15,8 @@ def serve_file(pth, filename = None, content_type = 'application/octet-stream'):
 		"""
 			Serve the file through Django; only for development!
 		"""
-		response = HttpResponse(open(pth, 'br').read())
+		with open(pth, 'rb') as fh:
+			response = HttpResponse(fh.read())
 	else:
 		"""
 			Let Apache do the work by giving it a X-Sendfile header as authorization.
