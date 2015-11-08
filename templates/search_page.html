@@ -1,0 +1,48 @@
+
+{% extends BASE_TEMPLATE %}
+
+{% load crispy_forms_tags %}
+{% load highlight %}
+
+
+{% block menu_autofocus %}{% endblock menu_autofocus %}
+
+{% block title %}
+	Home sweet home
+	{{ TITLE_SEPARATOR }}
+	{{ block.super }}
+{% endblock title %}
+
+{% block content %}
+
+	<h1>Search</h1>
+
+	{% crispy form %}
+
+	{% if query %}
+		<h2>Results</h2>
+
+		{% for result in page.object_list %}
+			<article class="search_result">
+				<h2>#{{ forloop.counter }} <a href="{{ result.object.get_absolute_url }}">{{ result.title }}</a></h2>
+				{{ result.description }}
+				<p>{% highlight result.description with query %}</p>
+			</article>
+		{% empty %}
+			<p>No results for "{{ query }}".</p>
+		{% endfor %}
+
+		{% if page.has_previous or page.has_next %}
+			<div>
+				{% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+				|
+				{% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+			</div>
+		{% endif %}
+	{% else %}
+		{# Show some example queries to run, maybe query syntax, something else? #}
+	{% endif %}
+
+{% endblock content %}
+
+

@@ -11,7 +11,7 @@ def autocomplete(request):
 	if len(query) < 2:
 		suggestions = []
 	else:
-		lighter = Highlighter(query, max_length=100)#todo 32
+		lighter = Highlighter(query, max_length=64)
 		sqs = SearchQuerySet().autocomplete(auto=query)[:7]
 		suggestions = []
 		for result in sqs:
