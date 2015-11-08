@@ -20,6 +20,10 @@
 
 {% block site_js %}
 	<script src="{% static 'script.js' %}?c={% static_mtime_b64 'script.js' %}"></script>
+	<script>
+		var autocomplete_url = "{% url 'autocomplete' %}";
+	</script>
+	<script src="{% static 'misc/bootstrap3-typeahead.min.js' %}?c={% static_mtime_b64 'misc/bootstrap3-typeahead.min.js' %}"></script>
 {% endblock site_js %}
 
 {% block page_attr %}{{ block.super }} class='container'{% endblock page_attr %}
@@ -87,7 +91,7 @@
 							<li class="form-group">
 								<form action="{% url 'search' %}" method="GET" title="cltr+H">
 									<div class="input-group">
-										<input id="search_field" type="text" name="q" class="form-control" placeholder="Search">
+										<input id="search_field" type="text" name="q" class="form-control search-typeahead" placeholder="Search" autocomplete="off">
 										<div class="input-group-btn" >
 											<label class="btn btn-default" for="search_submit_dropdown">
 												<i class="glyphicon glyphicon-search"></i>
@@ -118,7 +122,7 @@
 						<form class="form-inline" role="search" action="{% url 'search' %}" method="GET" title="cltr+H">
 							<div class="form-group">
 								<div class="input-group">
-									<input id="search_field" type="text" name="q" class="form-control" value="{{ query }}" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %}>
+									<input id="search_field" type="text" name="q" class="form-control search-typeahead" value="{{ query }}" placeholder="Search" {% block menu_autofocus %}autofocus{% endblock menu_autofocus %} data-provide="typeahead" autocomplete="off">
 									<div class="input-group-btn" onclick="">
 										<label class="btn btn-default" for="search_submit_bar">
 											<i class="glyphicon glyphicon-search"></i>

@@ -127,12 +127,22 @@
 }
 
 /*
-	Search results
+	Search results & autocomplete
 */
 .highlighted
 {
 	background-color: #EEE;
 	font-weight: bolder;
+}
+
+.typeahead.dropdown-menu
+{
+	overflow-x: hidden;
+}
+
+.typeahead
+{
+	z-index: 1051;
 }
 
 /*
@@ -299,4 +309,5 @@ body
 /*
 
 */
+
 

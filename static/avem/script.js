@@ -100,6 +100,38 @@ $(document).ready(function()
 			}.bind(null, img[0], wrapper))
 		}
 	});
+
+	/*
+		Autocompletion for search using a continuation of typehead.
+
+		Relies on autocomplete_url being set and that url returning json matches.
+
+		https://github.com/bassjobsen/Bootstrap-3-Typeahead
+	 */
+	var $input = $('.search-typeahead');
+	$input.typeahead({
+		minLength: 2,
+		items: 7,
+		delay: 100,
+		autoSelect: true,
+		source: function (query, process)
+		{
+			$.getJSON(autocomplete_url + '?q=' + query, function(process, data)
+			{
+				process(data);
+
+			}.bind(null, process));
+		},
+		afterSelect: function (element)
+		{
+			console.log('selected', element);
+			if (element.url)
+			{
+				console.log('redirect', element.url);
+				window.location.href = element.url;
+			}
+		},
+	});
 });
 
 /*
