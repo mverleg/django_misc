@@ -91,10 +91,10 @@
 					{% block page_footer %}
 						{% block footer_admin %}
 							{% if request.user.is_superuser %}
-								<li><a href="{% url 'backup' %}">backup</a></li>
+								<li><a href="{% url 'backup_db' %}">back</a><a href="{% url 'backup_media' %}">up</a></li>
 							{% endif %}
 							{% if request.user.is_staff %}
-								<li><a href="/admin/">admin</a></li>
+								<li><a href="{% url 'admin:index' %}">admin</a></li>
 							{% endif %}
 						{% endblock footer_admin %}
 						{% block footer %}

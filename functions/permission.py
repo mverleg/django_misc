@@ -16,7 +16,7 @@ def lazy_create_permission(codename):
 		https://stackoverflow.com/questions/29296757/django-data-migrate-permissions
 	"""
 	app_label, model = settings.AUTH_USER_MODEL.split('.')
-	UserType = ContentType.objects.get(app_label = app_label, model = model)
+	UserType = ContentType.objects.get(app_label=app_label, model=model.lower())
 	Permission = get_model('auth', 'Permission')
 	try:
 		perm = Permission.objects.get(
