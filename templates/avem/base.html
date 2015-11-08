@@ -45,7 +45,7 @@
 			</div>
 
 			<!-- Account options for small displays: a second collapse item -->
-			<div class="hidden-lg hidden-md hidden-sm visible-xs">
+			<div id="menu_account_parent" class="hidden-lg hidden-md hidden-sm visible-xs">
 				<div class="collapse navbar-collapse" id="menu_account">
 					<ul class="nav navbar-nav">
 						{% if request.user.is_authenticated %}
@@ -151,7 +151,7 @@
 {% endblock content_area %}
 
 {# #todo: should be at the botton OR DEEPER; currently not working #}
-{% block footer_area_attr %}{{ block.super }} class='navbar navbar-default navbar-fixed-bottom'{% endblock footer_area_attr %}
+{% block footer_area_attr %}{{ block.super }} class='navbar navbar-default navbar-fixed-bottom visible-lg visible-md hidden-sm hidden-xs'{% endblock footer_area_attr %}
 
 {% block footer_attr %}{{ block.super }} class='container'{% endblock footer_attr %}
 

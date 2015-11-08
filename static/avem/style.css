@@ -127,6 +127,15 @@
 }
 
 /*
+	Search results
+*/
+.highlighted
+{
+	background-color: #EEE;
+	font-weight: bolder;
+}
+
+/*
 	Tricks and foolishness
 */
 .hover_show span
@@ -151,6 +160,10 @@
 
 /* ************************************** */
 
+/*
+	Site structure
+*/
+
 body
 {
 	padding-top: 50px;
@@ -173,12 +186,6 @@ body
 	margin: .5em 0 .7em .5em;
 	padding: 0 .7em 0 0;
 }
-
-/*#footer > ul li:not(:last-child)
-{
-	border: solid #E7E7E7;
-	border-right-width: 1px;
-}*/
 
 #footer_area
 {
@@ -249,3 +256,47 @@ body
 	min-width: 25em;
 	padding: 1.5em 1.5em 0 1.5em;
 }
+
+/*
+	Make header and footer sticky, scroll only main content.
+*/
+#body_inside
+{
+	position: absolute;
+	overflow-y: scroll;
+	left: 0;
+	right: 0;
+	top: 50px;
+	bottom: 34px;
+}
+
+#main_menu .navbar-toggle.collapsed
+{
+	margin-bottom: 2px;
+}
+
+#menu_account_parent
+{
+	margin: 0 -15px;
+	padding: 0 15px;
+}
+
+#menu_account
+{
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+@media (max-width: 767px)  /* bootstrap sm */
+{
+	#menu_account_parent, #menu_general
+	{
+		background-color: rgba(255, 255, 255, 1);
+	}
+}
+
+/*
+
+*/
+

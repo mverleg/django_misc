@@ -71,14 +71,15 @@
 				</ol>
 			{% endblock main_menu %}
 		</div>
-
-		<div id='page' {% block page_attr %}{% endblock page_attr %}>
-			<div id='content' {% block content_attr %}{% endblock content_attr %}>
-				{% block content_area %}
-					{% block content %}
-						empty document for frame.html
-					{% endblock content %}
-				{% endblock content_area %}
+		<div id="body_inside">
+			<div id='page' {% block page_attr %}{% endblock page_attr %}>
+				<div id='content' {% block content_attr %}{% endblock content_attr %}>
+					{% block content_area %}
+						{% block content %}
+							empty document for frame.html
+						{% endblock content %}
+					{% endblock content_area %}
+				</div>
 			</div>
 		</div>
 
