@@ -25,7 +25,6 @@
 		{% for result in page.object_list %}
 			<article class="search_result">
 				<h2>#{{ forloop.counter }} <a href="{{ result.object.get_absolute_url }}">{{ result.title }}</a></h2>
-				{{ result.description }}
 				<p>{% highlight result.description with query %}</p>
 			</article>
 		{% empty %}
