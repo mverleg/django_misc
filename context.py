@@ -14,7 +14,6 @@ def context_settings(request):
 	return {
 		'DEBUG':                settings.DEBUG,
 		'SITE_URL':             settings.SITE_URL.rstrip('/'),
-		'BASE_TEMPLATE':        settings.BASE_TEMPLATE,
 		'BASE_EMAIL_TEMPLATE':  settings.BASE_EMAIL_TEMPLATE,
 		'TITLE_BASE':           mark_safe(getattr(settings, 'TITLE_BASE', 'TITLE_BASE')),
 		'TITLE_SEPARATOR':      mark_safe(getattr(settings, 'TITLE_SEPARATOR', '&laquo;')),
