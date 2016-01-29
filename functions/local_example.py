@@ -19,7 +19,7 @@ from os.path import dirname, join
 BASE_DIR = dirname(dirname(__file__))
 
 SITE_URL = '{0:s}.markv.nl' #todo: update url
-ALLOWED_HOSTS = ['.{0:s}'.format(SITE_URL), 'localhost', '.localhost.narkv.nl']
+ALLOWED_HOSTS = ['.{0:s}'.format(SITE_URL), 'localhost', '.localhost.markv.nl']
 
 SECRET_KEY = '{1:s}'
 

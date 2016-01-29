@@ -13,12 +13,9 @@ class RemoveWwwMiddleware():
 		Largely from https://gist.github.com/dryan/290771
 	"""
 	def process_request(self, request):
-		#try:
 		if request.META['HTTP_HOST'].lower().find('www.') == 0:
 			from django.http import HttpResponsePermanentRedirect
 			return HttpResponsePermanentRedirect(request.build_absolute_uri().replace('//www.', '//'))
-		#except:
-		#	pass
 
 
 class RemoveSlashMiddleware():
@@ -26,7 +23,7 @@ class RemoveSlashMiddleware():
 		Opposite of APPEND_SLASH.
 	"""
 	def process_request(self, request):
-		url = request.get_full_path()
+		url = request.path
 		if url.endswith('/'):
 			try:
 				# use full path here instead of absolute uri; resolve doesn't handle domain names
@@ -35,7 +32,8 @@ class RemoveSlashMiddleware():
 				""" Version without / at the end doesn't exist - do not redirect. """
 			else:
 				from django.http import HttpResponsePermanentRedirect
-				return HttpResponsePermanentRedirect(url[:-1])
+				get = request.GET.urlencode()
+				return HttpResponsePermanentRedirect(url[:-1] + ('?{0:s}'.format(get) if get else ''))
 
 
 class WwwSlashMiddleware():
