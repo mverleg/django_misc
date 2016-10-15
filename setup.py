@@ -13,7 +13,7 @@ with open('requires.pip', 'r') as fh:
 
 setup(
 	name='misc',
-	description='A lot of random utilities',
+	description='A lot of random utilities for Django',
 	long_description='',
 	url='',
 	author='Mark V',
@@ -21,8 +21,8 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='',
 	keywords=['django',],
-	version='1.0',
-	packages=find_packages(),
+	version='1.1',
+	packages=['misc'],
 	include_package_data=True,
 	zip_safe=False,
 	install_requires=requires,
