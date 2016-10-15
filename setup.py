@@ -5,6 +5,8 @@
 """
 
 from setuptools import setup, find_packages
+from os import listdir
+from os.path import isdir, join
 
 
 with open('requires.pip', 'r') as fh:
@@ -21,8 +23,10 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='',
 	keywords=['django',],
-	version='1.1',
-	packages=['misc'],
+	version='1.2',
+	packages=['misc'] + list(
+		'misc.{0:s}'.format(pth) for pth in listdir('misc') 
+			if isdir(join('misc', pth))),
 	include_package_data=True,
 	zip_safe=False,
 	install_requires=requires,
@@ -44,3 +48,5 @@ setup(
 		'Private :: Do Not Upload By Accident',
 	], requires=['django']
 )
+
+
