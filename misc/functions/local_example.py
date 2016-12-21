@@ -44,7 +44,7 @@ DATABASES = {{
 MEDIA_ROOT = join('data', 'media', '{0:s}')
 STATIC_ROOT = join('data', 'static', '{0:s}')
 
-TEMPLATE_DEBUG = DEBUG = True
+DEBUG = True
 \n\n'''
 
 
