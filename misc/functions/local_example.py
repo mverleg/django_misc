@@ -8,9 +8,9 @@ from sys import stderr
 
 template = '''
 """
-	A few local, potentially secret, settings.
+A few local, potentially secret, settings.
 
-	Do not include this in your repository!
+Do not include this in your repository!
 """
 
 from os.path import dirname, join
