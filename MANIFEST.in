@@ -1,0 +1,7 @@
+include LICENSE.txt
+recursive-include misc/templates *
+recursive-include misc/static *
+recursive-include misc *.html
+recursive-include misc *.png
+recursive-include misc *.js
+recursive-include misc *.css

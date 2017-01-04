@@ -23,9 +23,9 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='',
 	keywords=['django',],
-	version='1.2',
+	version='1.3',
 	packages=['misc'] + list(
-		'misc.{0:s}'.format(pth) for pth in listdir('misc') 
+		'misc.{0:s}'.format(pth) for pth in listdir('misc')
 			if isdir(join('misc', pth))),
 	include_package_data=True,
 	zip_safe=False,
