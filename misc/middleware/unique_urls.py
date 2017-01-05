@@ -1,16 +1,18 @@
 
 from django.conf import settings
 from django.core.urlresolvers import resolve, Resolver404
+from django.utils.deprecation import MiddlewareMixin
+
 
 assert not getattr(settings, 'PREPEND_WWW', False), \
 	'the setting PREPEND_WWW cannot be true when RemoveWWW middleware is enabled'
 
 
-class RemoveWwwMiddleware():
+class RemoveWwwMiddleware(MiddlewareMixin):
 	"""
-		Opposite of PREPEND_WWW (this will apparently never be added to Django).
+	Opposite of PREPEND_WWW (this will apparently never be added to Django).
 
-		Largely from https://gist.github.com/dryan/290771
+	Largely from https://gist.github.com/dryan/290771
 	"""
 	def process_request(self, request):
 		if request.META['HTTP_HOST'].lower().find('www.') == 0:
@@ -18,9 +20,9 @@ class RemoveWwwMiddleware():
 			return HttpResponsePermanentRedirect(request.build_absolute_uri().replace('//www.', '//'))
 
 
-class RemoveSlashMiddleware():
+class RemoveSlashMiddleware(MiddlewareMixin):
 	"""
-		Opposite of APPEND_SLASH.
+	Opposite of APPEND_SLASH.
 	"""
 	def process_request(self, request):
 		url = request.path
@@ -36,9 +38,9 @@ class RemoveSlashMiddleware():
 				return HttpResponsePermanentRedirect(url[:-1] + ('?{0:s}'.format(get) if get else ''))
 
 
-class WwwSlashMiddleware():
+class WwwSlashMiddleware(MiddlewareMixin):
 	"""
-		Combination of RemoveWwwMiddleware and AppendSlashMiddleware
+	Combination of RemoveWwwMiddleware and AppendSlashMiddleware
 	"""
 	def process_request(self, request):
 		original = request.build_absolute_uri()
@@ -67,5 +69,6 @@ class WwwSlashMiddleware():
 		if not original == nw:
 			from django.http import HttpResponsePermanentRedirect
 			return HttpResponsePermanentRedirect(nw)
+
 
 
