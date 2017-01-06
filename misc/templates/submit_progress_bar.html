@@ -91,6 +91,12 @@
 				}
 
 			}.bind(null, form, request), false);
+			request.addEventListener('error', function (event)
+			{
+				// console.log('progress:', event.loaded, 100.0 * event.loaded / event.total);
+				console.log('error!', event);
+				replace_node_by_html(form, '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>Upload failed!</div>');
+			}.bind(null, progress), false);
 			// setup request method and url
 			request.open(form.method || 'POST', form.action || '.');
 			// send the request
