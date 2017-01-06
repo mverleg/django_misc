@@ -90,9 +90,8 @@
                 }
 				else
 				{
-				    console.log("the file upload failed with status " + request.status);
 					var div = document.createElement('div');
-  div.innerHTML = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>The upload was not accepted!</div>';
+  div.innerHTML = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> The upload was not accepted! Error code ' + request.status + '</div>';
   //form.appendChild(div);
                     form.insertBefore(div, form.childNodes[0]);
 				}
