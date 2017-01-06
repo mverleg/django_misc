@@ -70,31 +70,31 @@
 			// check the result
 			request.addEventListener('load', function (form, request, event)
 			{
-				var resp = JSON.parse(request.response);
-				if (resp.success)
-				{
-					// redirect to success url
-					window.location.href = resp.redirect;
-				}
+				if (request.status == 200) {
+                    var resp = JSON.parse(request.response);
+                    if (resp.success) {
+                        // redirect to success url
+                        window.location.href = resp.redirect;
+                    }
+                    else {
+                        console.log("unsuccesful");  // todo
+                        form = replace_node_by_html(form, resp.form);
+                        var nwprogress = form.parentNode.getElementsByClassName('crispy_submit_progress_bar');
+                        if (nwprogress.length >= 1) {
+                            crispy_submit_progress_readygo(nwprogress[0]);
+                        }
+                        else {
+                            console.log('new form did not seem to contain a progress bar');
+                        }
+                    }
+                }
 				else
 				{
-					console.log("unsuccesful");
-					form = replace_node_by_html(form, resp.form);
-					var nwprogress = form.parentNode.getElementsByClassName('crispy_submit_progress_bar');
-					if (nwprogress.length >= 1)
-					{
-						crispy_submit_progress_readygo(nwprogress[0]);
-					}
-					else
-					{
-						console.log('new form did not seem to contain a progress bar');
-					}
 					var div = document.createElement('div');
-			        div.innerHTML = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>The upload was not accepted!</div>';
-					//form.appendChild(div);
-					form.insertBefore(newItem, form.childNodes[0]);
+  div.innerHTML = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>The upload was not accepted!</div>';
+  //form.appendChild(div);
+  form.insertBefore(newItem, form.childNodes[0]);
 				}
-
 			}.bind(null, form, request), false);
 			request.addEventListener('error', function (event)
 			{
