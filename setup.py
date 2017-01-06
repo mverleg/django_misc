@@ -11,7 +11,7 @@ from os.path import isdir, join
 
 with open('requires.pip', 'r') as fh:
 	requires = [package.split('# ')[0].strip() for package in fh.read().splitlines()
-	    if package.strip() and not package.startswith('#')]
+		if package.strip() and not package.startswith('#')]
 
 setup(
 	name='misc',
