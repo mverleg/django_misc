@@ -4,7 +4,7 @@
 	Adapted from https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
 """
 
-from setuptools import setup, find_packages
+from setuptools import setup
 from os import listdir
 from os.path import isdir, join
 
