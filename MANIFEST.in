@@ -5,3 +5,4 @@ recursive-include misc *.html
 recursive-include misc *.png
 recursive-include misc *.js
 recursive-include misc *.css
+recursive-include misc *.py

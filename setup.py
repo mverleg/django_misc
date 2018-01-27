@@ -23,7 +23,7 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='',
 	keywords=['django',],
-	version='1.4.1',
+	version='1.4.2',
 	packages=['misc'] + list(
 		'misc.{0:s}'.format(pth) for pth in listdir('misc')
 			if isdir(join('misc', pth))),
@@ -44,6 +44,7 @@ setup(
 		'Programming Language :: Python :: 3.3',
 		'Programming Language :: Python :: 3.4',
 		'Programming Language :: Python :: 3.5',
+		'Programming Language :: Python :: 3.6',
 		'Topic :: Software Development :: Libraries :: Python Modules',
 		'Private :: Do Not Upload By Accident',
 	], requires=['django']
