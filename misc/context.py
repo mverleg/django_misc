@@ -1,7 +1,9 @@
 
 from warnings import warn
+
 from django.conf import settings
 from django.utils.safestring import mark_safe
+
 from misc.functions.obfuscate import ENCCHARS
 
 

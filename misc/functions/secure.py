@@ -1,6 +1,6 @@
 
-from django.http import HttpResponseRedirect
 import settings
+from django.http import HttpResponseRedirect
 
 
 def secure_redirect(request, url = None):

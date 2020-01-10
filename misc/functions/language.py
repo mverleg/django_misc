@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from logging import warning
-from xpinyin import Pinyin
 
+from xpinyin import Pinyin
 
 xpinyin = Pinyin()
 

@@ -16,9 +16,10 @@
 
 from functools import partial
 from os.path import basename, splitext, join
+
 from django.conf import settings
-from django.utils.text import slugify
 from django.db.models import FileField, ImageField
+from django.utils.text import slugify
 
 
 def filename_to_name_field(instance, filename, upload_dir, name_field):

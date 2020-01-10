@@ -4,10 +4,10 @@
 	Adapted from https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/
 """
 
-from setuptools import setup
 from os import listdir
 from os.path import isdir, join
 
+from setuptools import setup
 
 with open('requires.pip', 'r') as fh:
 	requires = [package.split('# ')[0].strip() for package in fh.read().splitlines()
@@ -23,7 +23,7 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='',
 	keywords=['django',],
-	version='1.4.2',
+	version='1.5.0',
 	packages=['misc'] + list(
 		'misc.{0:s}'.format(pth) for pth in listdir('misc')
 			if isdir(join('misc', pth))),

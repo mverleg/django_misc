@@ -1,6 +1,7 @@
 
 from random import choice
 from string import ascii_letters
+
 from crispy_forms.layout import Submit, Layout, HTML
 from django.template.loader import render_to_string, get_template
 

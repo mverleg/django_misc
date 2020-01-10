@@ -1,9 +1,9 @@
 
-from django import forms
-from django.forms import ModelForm, Form
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Button
-from django.core.urlresolvers import reverse
+from django import forms
+from django.forms import ModelForm, Form
+from django.urls import reverse
 
 
 def BaseFormHelper(url_name = None, submit_name = 'submit', submit_css = '', back = '', back_name = 'back', back_css = 'btn_danger'):

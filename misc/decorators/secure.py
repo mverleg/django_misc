@@ -5,8 +5,9 @@
 	note that this is still not very secure if you allow sending session cookies over http
 """
 
-from misc.functions.secure import secure_redirect
 from django.conf import settings
+
+from misc.functions.secure import secure_redirect
 
 
 def redirect_to_secure(view_func):

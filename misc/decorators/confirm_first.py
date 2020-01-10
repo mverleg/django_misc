@@ -9,9 +9,8 @@
 		declaration, as this is executed as url's are loading)
 """
 
-from django.core.urlresolvers import reverse
 from django.shortcuts import render
-
+from django.urls import reverse
 
 CONFIRM_FIELD_NAME = 'confirmed'
 

@@ -2,8 +2,9 @@
 from random import choice
 from string import ascii_letters
 from warnings import warn
-from django.template.loader import render_to_string
+
 from django.forms import FileInput as DjangoFileInput
+from django.template.loader import render_to_string
 
 
 class BootstrapFileInput(DjangoFileInput):

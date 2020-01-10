@@ -1,10 +1,9 @@
 
 import string
 from os import chmod, makedirs
-from random import choice
 from os.path import join, exists, dirname, abspath
+from random import choice
 from sys import stderr
-
 
 template = '''
 """

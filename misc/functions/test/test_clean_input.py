@@ -1,7 +1,7 @@
 
-from misc.functions.clean_input import clean_input_html
 from misc.functions.sanitize import sanitize_html
 
+from misc.functions.clean_input import clean_input_html
 
 str1 = '''<b>Subjects</b><br><p class="MsoNormal">This course gives students an introduction to the concepts of
 environmental and natural resource economics. <br> We will deal with the following topics in this course:</p><em>Core

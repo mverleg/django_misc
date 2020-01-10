@@ -1,8 +1,8 @@
 
-from django.utils.html import escape, mark_safe
 from django import template
-from misc.functions.obfuscate import obfuscate_letter
+from django.utils.html import escape, mark_safe
 
+from misc.functions.obfuscate import obfuscate_letter
 
 register = template.Library()
 

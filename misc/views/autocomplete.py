@@ -3,6 +3,7 @@ from django.template.defaultfilters import striptags
 from django.utils.html import escape
 from haystack.query import SearchQuerySet
 from haystack.utils import Highlighter
+
 from misc.response.json_response import JSONResponse
 
 

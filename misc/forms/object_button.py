@@ -3,10 +3,11 @@
 	A default form for representing a button that handles something about an instance, e.g. delete.
 """
 
+from django import forms
+from django.core.exceptions import ValidationError
+
 from misc.forms.crispy import SimpleCrispyForm
 from misc.functions.render import render_str2str
-from django.core.exceptions import ValidationError
-from django import forms
 
 
 class ObjectButtonForm(SimpleCrispyForm):

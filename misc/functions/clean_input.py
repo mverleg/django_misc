@@ -1,6 +1,7 @@
 
-from bs4 import BeautifulSoup
 from re import sub
+
+from bs4 import BeautifulSoup
 from misc.functions.sanitize import sanitize_html
 
 

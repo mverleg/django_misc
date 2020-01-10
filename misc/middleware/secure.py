@@ -6,6 +6,7 @@
 """
 
 from django.conf import settings
+
 from misc.functions.secure import secure_redirect
 
 
