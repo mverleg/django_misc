@@ -1,8 +1,6 @@
-
 from django.conf import settings
 from django.core.urlresolvers import resolve, Resolver404
 from django.utils.deprecation import MiddlewareMixin
-
 
 assert not getattr(settings, 'PREPEND_WWW', False), \
 	'the setting PREPEND_WWW cannot be true when RemoveWWW middleware is enabled'
@@ -14,6 +12,7 @@ class RemoveWwwMiddleware(MiddlewareMixin):
 
 	Largely from https://gist.github.com/dryan/290771
 	"""
+	
 	def process_request(self, request):
 		if request.META['HTTP_HOST'].lower().find('www.') == 0:
 			from django.http import HttpResponsePermanentRedirect
@@ -24,6 +23,7 @@ class RemoveSlashMiddleware(MiddlewareMixin):
 	"""
 	Opposite of APPEND_SLASH.
 	"""
+	
 	def process_request(self, request):
 		url = request.path
 		if url.endswith('/'):
@@ -42,6 +42,8 @@ class WwwSlashMiddleware(MiddlewareMixin):
 	"""
 	Combination of RemoveWwwMiddleware and AppendSlashMiddleware
 	"""
+	
+	#TODO: warning: this seems to cause probems with get parameters in admin panel (filtering)
 	def process_request(self, request):
 		original = request.build_absolute_uri()
 		nw = original.replace('//www.', '//')
@@ -69,6 +71,3 @@ class WwwSlashMiddleware(MiddlewareMixin):
 		if not original == nw:
 			from django.http import HttpResponsePermanentRedirect
 			return HttpResponsePermanentRedirect(nw)
-
-
-
