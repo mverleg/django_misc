@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.urlresolvers import resolve, Resolver404
+from django.urls import resolve, Resolver404
 from django.utils.deprecation import MiddlewareMixin
 
 assert not getattr(settings, 'PREPEND_WWW', False), \
