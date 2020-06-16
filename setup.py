@@ -23,7 +23,7 @@ setup(
 	author_email='mdilligaf@gmail.com',
 	license='',
 	keywords=['django',],
-	version='1.5.1',
+	version='1.6.0',
 	packages=['misc'] + list(
 		'misc.{0:s}'.format(pth) for pth in listdir('misc')
 			if isdir(join('misc', pth))),
